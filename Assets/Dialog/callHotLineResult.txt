@@ -1,0 +1,36 @@
+{"frames": {
+
+"clientServer.png":
+{
+	"frame": {"x":2,"y":541,"w":275,"h":350},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":275,"h":350},
+	"sourceSize": {"w":275,"h":350}
+},
+"dialogBackGround.png":
+{
+	"frame": {"x":2,"y":2,"w":537,"h":537},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":5,"w":537,"h":537},
+	"sourceSize": {"w":553,"h":549}
+},
+"dialogWordsBack.png":
+{
+	"frame": {"x":2,"y":893,"w":286,"h":71},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":286,"h":71},
+	"sourceSize": {"w":286,"h":71}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "callHotLineResult.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:86d63f0cfcc90ffabf79166684504617$"
+}
+}

@@ -1,0 +1,116 @@
+{"frames": {
+
+"arrow.png":
+{
+	"frame": {"x":2,"y":2,"w":28,"h":29},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":28,"h":29},
+	"sourceSize": {"w":28,"h":29}
+},
+"black.png":
+{
+	"frame": {"x":32,"y":2,"w":85,"h":39},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":2,"w":85,"h":39},
+	"sourceSize": {"w":91,"h":43}
+},
+"blackBack.png":
+{
+	"frame": {"x":119,"y":2,"w":57,"h":71},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":2,"w":57,"h":71},
+	"sourceSize": {"w":69,"h":77}
+},
+"classficate_dialog_2.png":
+{
+	"frame": {"x":178,"y":2,"w":623,"h":493},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":8,"w":623,"h":493},
+	"sourceSize": {"w":635,"h":505}
+},
+"green.png":
+{
+	"frame": {"x":803,"y":2,"w":85,"h":38},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":2,"w":85,"h":38},
+	"sourceSize": {"w":93,"h":42}
+},
+"greenBack.png":
+{
+	"frame": {"x":890,"y":2,"w":57,"h":71},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":4,"w":57,"h":71},
+	"sourceSize": {"w":65,"h":79}
+},
+"informateBack.png":
+{
+	"frame": {"x":2,"y":497,"w":307,"h":72},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":307,"h":72},
+	"sourceSize": {"w":307,"h":72}
+},
+"pointer.png":
+{
+	"frame": {"x":311,"y":497,"w":156,"h":82},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":5,"w":156,"h":82},
+	"sourceSize": {"w":172,"h":94}
+},
+"red.png":
+{
+	"frame": {"x":469,"y":497,"w":85,"h":39},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":4,"w":85,"h":39},
+	"sourceSize": {"w":91,"h":49}
+},
+"redBack.png":
+{
+	"frame": {"x":556,"y":497,"w":58,"h":72},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":2,"w":58,"h":72},
+	"sourceSize": {"w":68,"h":78}
+},
+"yellow.png":
+{
+	"frame": {"x":616,"y":497,"w":85,"h":36},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":2,"w":85,"h":36},
+	"sourceSize": {"w":93,"h":40}
+},
+"yellowBack.png":
+{
+	"frame": {"x":703,"y":497,"w":55,"h":72},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":2,"w":55,"h":72},
+	"sourceSize": {"w":67,"h":78}
+},
+"zhuanpan.png":
+{
+	"frame": {"x":760,"y":497,"w":233,"h":233},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":6,"w":233,"h":233},
+	"sourceSize": {"w":249,"h":245}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "classficate_dialog_2.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e54515ac21b686e8e0e582f12893af4c$"
+}
+}

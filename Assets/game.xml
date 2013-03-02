@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Game xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Dialogs name="dialog_1">
+		<Dialog name="selectRightOrder" allscore="12">
+      <Questions>
+        <Question id="estimate_dialog" answer="1" score="3" text="评估现场"></Question>
+        <Question id="hotline_dialog" answer="2" score="3" text="紧急电话"></Question>
+        <Question id="classficate_1_dialog" answer="3" score="3" text="检伤处理"></Question>
+        <Question id="security_line" answer="4" score="3" text="安全线"></Question>
+        
+      </Questions>
+		</Dialog>
+		<Dialog name="estimateLive" allscore="24">
+      <Questions>
+        <Question id="q_1" answer="right" score="3" image="h2" image_1="h1" text="事故现场及周边环境安全，相撞后的两辆汽车无漏油、无爆炸、无起火的危险，无电线杆倒塌及电线掉落，周围建筑物完好，无掉落物"></Question>
+        <Question id="q_2" answer="right" score="3" image="e2" image_1="e1" text="在幸福路133号发生一起交通事故，一辆大客车与一辆商务车在丁字口相撞。"></Question>
+        <Question id="q_3" answer="right" score="3" image="f2" image_1="f1" text="初步判断大概有十二三名伤员，1-2名重度伤员，3-4名中度受伤者，多为骨折伤员，7-8名轻伤员。"></Question>
+        <Question id="q_4" answer="right" score="3" image="d2" image_1="d1" text="医学生利用所带急救物品立即对伤员进行止血、包扎、固定和搬运，需要速派120急救车及专业急救人员。"></Question>
+        <Question id="q_5" answer="wrong" score="3" image="g2" image_1="g1" text="在建建筑物距离事故现场50米，不构成安全隐患。"></Question>
+        <Question id="q_6" answer="wrong" score="3" image="c2" image_1="c1" text="司机因疲劳驾驶酿成惨祸。"></Question>
+        <Question id="q_7" answer="wrong" score="3" image="i2" image_1="i1" text="没有受伤的人员，大多数都被吓得惊慌失措。"></Question>
+        <Question id="q_8" answer="wrong" score="3" image="a2" image_1="a1" text="为了确保所有伤员得到最好救治，经现场初步急救后，必须把他们送到距离事故现场20公里远的我市唯一一家三级医院。"></Question>
+      </Questions>
+		</Dialog>
+    <Dialog name="callHotLine" allscore="21">
+      <Questions>
+        <Question id="op_1" answer="right" score="3" text="事故发生的具体位置"></Question>
+        <Question id="op_2" answer="right" score="3" text="什么车辆相撞"></Question>
+        <Question id="op_3" answer="right" score="3" text="受伤人数及主要伤情"></Question>
+        <Question id="op_4" answer="wrong" score="0" text="事故现场围观人群的情况"></Question>
+        <Question id="op_5" answer="wrong" score="0" text="事故现场街道居民的情况"></Question>
+        <Question id="op_6" answer="right" score="9" text="在幸福路133号胜利中学"></Question>
+        <!--往南200米的丁字口，有一辆大客车和一辆商务车相撞，初步判断大概有十二三名伤员，1-2名重度伤员，3-4名中度受伤者，多为骨折伤员，7-8名轻伤员-->
+        <Question id="op_7" answer="wrong" score="0" text="在幸福路，有车辆相撞"></Question>
+        <!--有很多人受伤，大多数人都是公务员，围观人群有老人、青壮年、儿童，大多数不愿意为伤员提供救助。 -->
+        <Question id="op_8" answer="wrong" score="0" text="在胜利中学附近，发生撞车，"></Question>
+        <!--初步判断大概有十二三名伤员，他们的姓名是张三、李四……，街道居民大多为外来务工者，文化水平较低，急救知识技能缺乏。 -->
+        
+      </Questions>
+    </Dialog>
+    <Dialog name="classification_1" allscore="12">
+      <Questions>
+        <Question id="op_1" answer="1" text="红" image="red" ></Question>
+        <Question id="op_2" answer="2" text="黄" image="yellow" ></Question>
+        <Question id="op_3" answer="3" text="绿" image="blue" ></Question>
+        <Question id="op_4" answer="4" text="黑" image="black" ></Question>
+      </Questions>
+    </Dialog>
+    <Dialog name="classification" allscore="36">
+      <Questions>
+      <Question id="q_0" answer="black" score="3" image="CK_MALE_01" text="乘客0:中年男性，呼之不应，胸廓无起伏，颈动脉搏动消失，瞳孔散大，头部受伤严重，满头是血，可见脑浆，全身皮肤青紫。对应贴黑色伤情识别卡。"></Question>
+      <Question id="q_1" answer="red" score="3" image="SY_MALE_01" text="乘客1:中年男性，讲话稍费力，气道通畅，呼吸23次/分，胸部查体正常，心率110次/分，血压80/50mmHg，神志清醒，四肢触、痛觉存在。平躺着一动不动，面色苍白，左腘窝处外伤，流血不止，身体其他部位未见明显外伤。诊断：左下肢开放性外伤、左侧腘动脉损伤。"></Question>
+      <Question id="q_2" answer="yellow" score="3" image="CK_FEMALE_02" text="乘客2:中年女性，神志清醒，对答如流，呼吸21次/分，心率98次/分。头部前额、左脚流血，表情痛苦。"></Question>
+      <Question id="q_3" answer="yellow" score="3" image="CK_MALE_03" text="乘客3:青年男性，神志清醒，对答如流。呼吸23次/分，心率102次/分。左小腿前部正中被行李箱压住了，表情痛苦。"></Question>
+      <Question id="q_4" answer="yellow" score="3" image="CK_MALE_04" text="乘客4：中年男性，神志清醒，对答如流，呼吸22次/分，心率95次/分。头顶部、右脚大脚趾流血。"></Question>
+      <Question id="q_5" answer="yellow" score="3" image="CK_MALE_06" text="乘客6：青年男性，神志清醒，对答如流，呼吸23次/分，心率108次/分。腹部插着半截玻璃。"></Question>
+      <Question id="q_6" answer="yellow" score="3" iamge="CK_MALE_07" text="乘客7：青年男性，神志清醒，对答如流，呼吸22次/分，心率105次/分。右前臂和右大腿都不能动、肿胀明显（骨折的伤员）。"></Question>
+      <Question id="q_7" answer="yellow" score="3" image="CK_MALE_08" text="乘客8：中年男性，神志清醒，对答如流，呼吸20次/分，心率90次/分。平躺着不动，表情痛苦（脊柱受伤的伤员）。"></Question>
+      <Question id="q_8" answer="blue"  score="3" image="CK_FEMALE_05" text="乘客5：小女孩，神志清醒，对答如流，生命体征正常。右前臂掌侧正中划伤，轻微流血。"></Question>
+      <Question id="q_9" answer="blue" score="3" image="CK_FEMALE_09" text="乘客9：老奶奶，神志清醒，对答如流，生命体征正常。轻伤，需要扶行的伤员。"></Question>
+      <Question id="q_10" answer="blue" score="3" image="CK_MALE_10" text="乘客10：老大爷，神志清醒，对答如流，生命体征正常。轻伤，需要担架抬出的伤员。"></Question>
+      <Question id="q_11" answer="blue" score="3" image="CK_MALE_11" text="乘客11：青年男性，神志清醒，对答如流，生命体征正常。体轻，左脚背被划伤了、能自己行走。"></Question>
+    </Questions>
+    </Dialog>
+	</Dialogs>
+</Game>

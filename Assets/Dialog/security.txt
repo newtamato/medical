@@ -1,0 +1,36 @@
+{"frames": {
+
+"dun.png":
+{
+	"frame": {"x":430,"y":2,"w":66,"h":129},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":66,"h":129},
+	"sourceSize": {"w":66,"h":129}
+},
+"line.png":
+{
+	"frame": {"x":2,"y":100,"w":133,"h":84},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":84},
+	"sourceSize": {"w":133,"h":84}
+},
+"toolBackGround.png":
+{
+	"frame": {"x":2,"y":2,"w":426,"h":96},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":426,"h":96},
+	"sourceSize": {"w":430,"h":100}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "security.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:0270ff7c23fc036df1f08f3a6b3da228$"
+}
+}
