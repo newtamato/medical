@@ -7,18 +7,24 @@ private var m_dataList:List.<Question>;
 private var m_score:int = 0;
 private var m_putCount:int = 0;
 
-// public var first:GameObject;
-// public var second:GameObject;
-// public var third:GameObject;
-// public var forth:GameObject;
 
-function Start () {
 
-}
 
 function Update () {
+	
+	var children:DataItem_Controller[] = orderList.GetComponentsInChildren(DataItem_Controller);
 
+	var excludeData:Array = [];
+	for(var child:DataItem_Controller in children){
+		var data:Question = getQuestionById(child.id);
+		if(data!=null){
+			continue;
+		}else{
+			excludeData.push(child.id);
+		}
+	}
 }
+
 function onLoadDataComplete():void{
 	Debug.Log("I got the load data complete event!");
 	var dialogData:Dialog = DataManager.getInstance().getDialog("classification_1");
@@ -39,21 +45,20 @@ function initDialogList():void{
 	
 	var childCount:int = orderList.transform.childCount;
 	var isNew:boolean = false;
-	
-	Debug.Log("MakeChoiceToSave_Controller::initDialogList::count = "+count +",childCount = "+ childCount);
-	
+
 	for(index =0; index<count; index++){
-		Debug.Log("MakeChoiceToSave_Controller::initDialogList::index = "+index);
+		
+		var itemData:Question = m_dataList[index];
+
 		var itemDisplay:GameObject = null;
 		itemDisplay = Instantiate(itemPrefab);
 		itemDisplay.transform.parent = orderList.transform;		
 		itemDisplay.transform.localScale = new Vector3(1,1,1);
-		itemDisplay.name = "order_item_"+ index;
-		//Debug.Log("initDialogList::itemDisplay = "+ itemDisplay +",index = "+ index);
+		itemDisplay.transform.localPosition = new Vector3(0,0,0);
+		itemDisplay.name = itemData.id;
 		
-		
+
 		var displayComponent: UISprite = itemDisplay.GetComponent( UISprite) as  UISprite;
-		var itemData:Question = m_dataList[index];
 		if(itemData){
 			displayComponent.spriteName = itemData.image;		
 		}
@@ -66,30 +71,6 @@ function initDialogList():void{
 		}
 		
 	}
-
-	// for(var itemData:Question in m_dataList){
-	// 	Debug.Log(itemData);
-		
-	// 	var itemDisplay:GameObject = Instantiate(itemPrefab);
-	// 	var displayComponent: UISprite = itemDisplay.GetComponent( UISprite) as  UISprite;
-	// 	if(itemData){
-	// 		displayComponent.spriteName = itemData.image;		
-	// 	}
-	// 	index ++;
-	// 	itemDisplay.transform.parent = orderList.transform;		
-		
-	// 	itemDisplay.transform.localScale = new Vector3(1,1,1);
-	// 	itemDisplay.name = "order_item_"+ index;
-
-	// 	var dataComponent:DataItem_Controller = itemDisplay.GetComponent(DataItem_Controller) as DataItem_Controller;
-	// 	if(null == dataComponent){
-	// 		dataComponent = itemDisplay.AddComponent(DataItem_Controller);
-	// 	}
-	// 	dataComponent.id = itemData.id;
-	// 	dataComponent.image = itemData.image;
-	// 	dataComponent.tag = "estimate_item_1_tag";
-	// }
-
 	var orderList:UITable = orderList.GetComponent("UITable") as UITable;
 	orderList.Reposition();
 }

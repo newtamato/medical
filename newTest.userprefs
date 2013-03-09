@@ -1,0 +1,26 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/DataManager.js">
+    <Files>
+      <File FileName="Assets/NGUI/Examples/Scripts/Other/DragDropItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/NGUI/Examples/Scripts/Other/DragDropSurface.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/walkWithMouseClick.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/walkWithMouseClick1.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/setRoadBarrier.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/TileController.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/Tool_Controller.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/DataManager.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/MenuDialog_Controller.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/UIManager.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/MakeChoiceToSave_Controller.js" Line="1" Column="1" />
+      <File FileName="Assets/Standard Assets/Scripts/Utility Scripts/MeshCombineUtility.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Classficate_Dialog_Controller.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/AtlasManager.js" Line="1" Column="1" />
+      <File FileName="Assets/Script/CallHotLine_Controller.js" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

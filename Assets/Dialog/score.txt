@@ -34,23 +34,31 @@
 },
 "award_5.png":
 {
-	"frame": {"x":2,"y":293,"w":215,"h":277},
+	"frame": {"x":870,"y":2,"w":215,"h":277},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":215,"h":277},
 	"sourceSize": {"w":215,"h":277}
 },
-"dialog_back.png":
+"dialog_back.PNG":
 {
-	"frame": {"x":219,"y":293,"w":355,"h":372},
+	"frame": {"x":1087,"y":2,"w":354,"h":371},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":6,"y":2,"w":355,"h":372},
-	"sourceSize": {"w":367,"h":382}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":354,"h":371},
+	"sourceSize": {"w":354,"h":371}
+},
+"dialog_big_back.png":
+{
+	"frame": {"x":2,"y":375,"w":632,"h":536},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":632,"h":536},
+	"sourceSize": {"w":632,"h":536}
 },
 "lihong_YXS_FEMALE_02.png":
 {
-	"frame": {"x":576,"y":293,"w":106,"h":169},
+	"frame": {"x":636,"y":375,"w":106,"h":169},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":5,"w":106,"h":169},
@@ -58,15 +66,31 @@
 },
 "star.png":
 {
-	"frame": {"x":684,"y":293,"w":73,"h":71},
+	"frame": {"x":744,"y":375,"w":59,"h":58},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":2,"w":73,"h":71},
-	"sourceSize": {"w":73,"h":73}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":58},
+	"sourceSize": {"w":59,"h":58}
+},
+"star_black.png":
+{
+	"frame": {"x":805,"y":375,"w":67,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":64},
+	"sourceSize": {"w":67,"h":64}
+},
+"star_small_black.png":
+{
+	"frame": {"x":874,"y":375,"w":48,"h":46},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":46},
+	"sourceSize": {"w":48,"h":46}
 },
 "wangxiaojun_YXS_MALE_03.png":
 {
-	"frame": {"x":759,"y":293,"w":113,"h":170},
+	"frame": {"x":924,"y":375,"w":113,"h":170},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":4,"y":4,"w":113,"h":170},
@@ -74,7 +98,7 @@
 },
 "wangxiaoming_YXS_MALE_01.png":
 {
-	"frame": {"x":874,"y":293,"w":121,"h":169},
+	"frame": {"x":1039,"y":375,"w":121,"h":169},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":3,"y":4,"w":121,"h":169},
@@ -85,8 +109,8 @@
 	"version": "1.0",
 	"image": "score.png",
 	"format": "RGBA8888",
-	"size": {"w":1024,"h":1024},
+	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:00ce3c7d984887fe14fd4a203b203348$"
+	"smartupdate": "$TexturePacker:SmartUpdate:c39a8a17e19f91385e91a107a84b1f63$"
 }
 }

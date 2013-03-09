@@ -30,6 +30,9 @@ function Update ()
  	if(Global.getInstance().getCurrentState() == Global.UI){
  		return ;
  	}
+ 	if(Global.getInstance().getCurrentState() == Global.SCENE){
+ 		return ;
+ 	}
  	// if(UIManager.getInstance().getCurrentOperation() == UIManager.OPERATION_DUN){
  	// 	return;
  	// }

@@ -5,6 +5,7 @@ public var validList:GameObject;
 public var invalidList:GameObject;
 public var smallEstimatePrefab:GameObject;
 
+
 private var okBtn:GameObject;
 
 private var dataList:List.<Question>;
@@ -48,7 +49,7 @@ function init():void{
 	if(null == dataList){
 		return;
 	}
-	var grid:UITable = estimateList.GetComponent("UITable") as UITable;
+	var grid:UIGrid = estimateList.GetComponent("UIGrid") as UIGrid;
 	var img:UISprite =null;
 	var index:int = 0;
 	for (var itemdata:Question in dataList){
@@ -56,7 +57,7 @@ function init():void{
 		var item:GameObject = Instantiate(itemPrefab);
 		if(item){
 			index++;
-			 
+			item.AddComponent(UIDragPanelContents); 
 			var dataComponent:DataItem_Controller = item.GetComponent(DataItem_Controller) as DataItem_Controller;
 			dataComponent.id = itemdata.id;
 			dataComponent.image = itemdata.image_1;
@@ -122,7 +123,7 @@ function DropItemComplete(valid:boolean):void{
 		return;
 	}
 	Debug.Log("estimateDialog :: CheckParentPos...................");
-	var table:UITable = estimateList.GetComponent("UITable") as UITable;
+	var table:UIGrid = estimateList.GetComponent("UIGrid") as UIGrid;
 	table.Reposition();
 	var tableTrans:Transform = table.transform;
 	var child:Transform =null;
@@ -185,6 +186,7 @@ function onConfim():void{
 	Debug.Log("score = "+ m_score);
 	UIManager.getInstance().addScore(m_score);
 	UIManager.getInstance().nextDialog();
+	UIManager.getInstance().addFinishedDialog(UIManager.UI_ESTIMATE);
 }
 
 function onCancel():void{
@@ -213,6 +215,8 @@ function getScoreById(id:String):int{
 
 function onLeftBtn():void{
 	estimateList.transform.localPosition.x -=150;
+
+
 }
 function onRightBtn():void{
 	estimateList.transform.localPosition.x +=150;

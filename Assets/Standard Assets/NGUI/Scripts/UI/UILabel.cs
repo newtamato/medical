@@ -434,7 +434,7 @@ public class UILabel : UIWidget
 			scale.z = 1f;
 
 			Vector2 actualSize = relativeSize * scale.x;
-
+			
 			int x = Mathf.RoundToInt(actualSize.x / pixelSize);
 			int y = Mathf.RoundToInt(actualSize.y / pixelSize);
 

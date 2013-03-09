@@ -82,7 +82,9 @@ public class UIGrid : MonoBehaviour
 				Transform t = myTrans.GetChild(i);
 
 				if (!t.gameObject.active && hideInactive) continue;
+				
 
+				
 				t.localPosition = (arrangement == Arrangement.Horizontal) ?
 					new Vector3(cellWidth * x, -cellHeight * y, 0f) :
 					new Vector3(cellWidth * y, -cellHeight * x, 0f);

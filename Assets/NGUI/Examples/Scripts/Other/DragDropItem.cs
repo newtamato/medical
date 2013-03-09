@@ -38,6 +38,9 @@ public class DragDropItem : MonoBehaviour
 	{
 		// Is there a droppable container?
 		Debug.Log("DragDropItem::Drop");
+		if(mParent ==null || mParent.gameObject == null){
+			return ;
+		}
 		Collider col = UICamera.lastHit.collider;
 		DragDropContainer container = (col != null) ? col.gameObject.GetComponent<DragDropContainer>() : null;
 		
@@ -56,9 +59,11 @@ public class DragDropItem : MonoBehaviour
 		{
 			//Debug.Log("DragDropItem::Drop::"+col.gameObject.name);
 			// No valid container under the mouse -- revert the item's parent
-			mTrans.parent = mParent;
-			
-			valid = false;
+			if(mParent && mParent.gameObject){
+				mTrans.parent = mParent;
+				valid = false;
+				Debug.Log("[DragDropItem::Drop] mParent = "+ mParent.gameObject.name);
+			}
 		}
 		// Notify the table of this change
 		UpdateTable();
@@ -86,12 +91,27 @@ public class DragDropItem : MonoBehaviour
 			{
 				mIsDragging = true;
 				mParent = mTrans.parent;
+				Debug.Log("[DragDropItem][OnDrag]"+ mParent.gameObject.name);
 				mTrans.parent = DragDropRoot.root;
+				Vector3 position = new Vector3(0,0,0);
+				DragPositonComponent positionComponent = mTrans.GetComponent<DragPositonComponent>();
+				if(positionComponent){
+					position = positionComponent.positionDelta;
+					mTrans.localPosition += position;
+					
+				}
+
+				if(DragDropRoot.root.gameObject){
+					Debug.Log("[DragDropItem::OnDrag]drag drop root name is " + DragDropRoot.root.gameObject.name);
+				}
 				mTrans.BroadcastMessage("CheckParent", SendMessageOptions.DontRequireReceiver);
 			}
 			else
 			{
-				mTrans.localPosition += (Vector3)delta;
+
+				mTrans.localPosition += (Vector3)delta ;
+				Debug.Log("[DragDropItem::OnDrag] delta = "+delta +",position = ");
+
 			}
 		}
 	}

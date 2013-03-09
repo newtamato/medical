@@ -49,8 +49,8 @@ function setData(data:List.<Question>):void{
 	m_startIndex = 0;
 	m_max = dataList.Count;
 	var resultList :Question[] = getData();
-	initListFromData(resultList);
-	
+	// initListFromData(resultList);
+	initListFromData(dataList);
 }
 
 public function getData():Question[]{
@@ -84,18 +84,9 @@ function onMouseOverToPatientItem(id:String,msg:String,gameObject_name:String,it
 	if(m_currentGameObject != itemGameObject){
 		m_currentGameObject = itemGameObject;
 	}
-	if(gameObject_name == "Patient_1"){
-		arrow.transform.localPosition.x = -170;
-	}
-	if(gameObject_name == "Patient_2"){
-		arrow.transform.localPosition.x = -65;
-	}
-	if(gameObject_name == "Patient_3"){
-		arrow.transform.localPosition.x = 46;	
-	}
-	if(gameObject_name == "Patient_4"){
-		arrow.transform.localPosition.x = 157;
-	}
+	arrow.transform.position.y = itemGameObject.transform.position.y;
+
+	
 	var tipComponent:Tip_Controller = tip.GetComponent(Tip_Controller) as Tip_Controller;
 	tipComponent.setText(msg);
 	var hasDoneIt:boolean = hasDoneIt(m_currentId);
@@ -111,14 +102,14 @@ function onMouseOverToPatientItem(id:String,msg:String,gameObject_name:String,it
 	}
 
 }
-function initListFromData(questions:Question[]):void{
+function initListFromData(questions:List.<Question>):void{
 	if(questions ==null ){
 		return;
 	}
-	if(questions.get_Length() == 0){
+	if(questions.Count == 0){
 		return;
 	}
-	Debug.Log("questions.length() = "+ questions.get_Length());
+	//Debug.Log("questions.length() = "+ questions.get_Length());
 	
 	var grid:UIGrid = patientList.GetComponent("UIGrid") as UIGrid;
 
@@ -126,6 +117,7 @@ function initListFromData(questions:Question[]):void{
 	var gridTransform:Transform = grid.transform;
 	var pItemControl:PatientItem_Controller;
 	var item:Question = null;
+	
 	if(gridTransform.childCount ==4){
 		for (var i:int = 0; i < gridTransform.childCount; ++i)
 		{
@@ -138,37 +130,45 @@ function initListFromData(questions:Question[]):void{
 				
 			}
 			pItemControl.setMouseOverFunction(onMouseOverToPatientItem);
-			if(item){
-				p_item.active = true;
-				p_item.SetActiveRecursively(true);
-				var back:String = getColorById(item.id);
-				if(back == null || back == ""){
-					back = "greenBack";
-				}
-				pItemControl.setData(item.id,item.text,item.image,item,back);
-			}else{
-				//p_item.active = false;
-				//p_item.SetActiveRecursively(false);
-			}
+			
 			
 		}
 	}else{
+		var index:int = 0;
 		for(item in questions){
 			p_item = Instantiate(itemPrefab);
 			if(p_item){
 
 				p_item.transform.parent = grid.transform;		
+				p_item.name = "patient_"+index;
 				pItemControl = p_item.GetComponent(PatientItem_Controller) as PatientItem_Controller;
-				pItemControl.setData(item.id,item.text,item.image,null,null);
+								
+
 				pItemControl.setMouseOverFunction(onMouseOverToPatientItem);
 				p_item.transform.localScale = new Vector3(1,1,1);
 				p_item.transform.localPosition = new Vector3(0,0,0);		
+				
+				if(item){
+					p_item.active = true;
+					p_item.SetActiveRecursively(true);
+					var back:String = getColorById(item.id);
+					if(back == null || back == ""){
+						back = "greenBack";
+					}
+					pItemControl.setData(item.id,item.text,item.image,item,back);
+				}else{
+			
+				}
 			}
+			index++;
+
 		}
 		grid.Reposition();
 	}
 }
-
+function show():void{
+	clearTipArrow();	
+}
 function clearTipArrow(){
 	arrow.active = false;
 	tip.active = false;
@@ -188,7 +188,7 @@ function onLeftBtn():void{
 		m_startIndex = 0;
 	}
 	var resultList:Question[] = getData();
-	initListFromData(resultList);
+	//initListFromData(resultList);
 }
 function onRgihtBtn ():void {
 	// body...
@@ -205,7 +205,7 @@ function onRgihtBtn ():void {
 	
 	
 	var resultList:Question[] = getData();
-	initListFromData(resultList);
+	//initListFromData(resultList);
 }
 
 function onStartRotate():void{
@@ -214,6 +214,7 @@ function onStartRotate():void{
 		return;
 	}
 	if(rotatePointer){
+		m_start = false;
 		var rotateComponent:RotatingUnityGUI = rotatePointer.GetComponent(RotatingUnityGUI) as RotatingUnityGUI;
 		if(rotateComponent){
 			rotateComponent.StartRotate();
@@ -245,7 +246,9 @@ function onStopRotate():void{
 		answer.id = m_currentId;
 		answer.color = color;
 		m_answers.push(answer);
-
+		if(null == m_currentGameObject){
+			return;
+		}
 		var itemController:PatientItem_Controller = m_currentGameObject.GetComponent(PatientItem_Controller) as PatientItem_Controller;
 		if(itemController){
 			if(null !=itemController.p_back){
@@ -274,6 +277,7 @@ function hasAllFinish():boolean{
 }
 
 function Update():void{
+	return;
 	var hasFinished:boolean = hasAllFinish();
 	if(hasFinished){
 		labelTxt.text = "下一题";
@@ -302,16 +306,16 @@ function getColorFromRotate():String{
 	Debug.Log("currentRotation = "+ currentRotation);
 	currentRotation = currentRotation%360;
 	var color:String = "";
-	if(currentRotation > 316 && currentRotation <360 || (currentRotation>0 && currentRotation<40)){
+	if(currentRotation > 90 && currentRotation <=180 ){
 		color =  "red";
 	}
-	if(currentRotation > 41 && currentRotation <130){
+	if(currentRotation > 180 && currentRotation <=270){
 		color = "green";
 	}
-	if(currentRotation > 131 && currentRotation <225){
+	if(currentRotation > 270 && currentRotation <=360){
 		color = "yellow";
 	}
-	if(currentRotation > 225 && currentRotation <315){
+	if(currentRotation > 0 && currentRotation <=90){
 		color = "black";
 	}
 	Debug.Log(currentRotation +", color is "+ color);
@@ -323,6 +327,7 @@ function onConfirm():void{
 	var hasFinished:boolean = hasAllFinish();
 	if(hasFinished){
 		UIManager.getInstance().nextDialog();
+		UIManager.getInstance().addFinishedDialog(UIManager.UI_CLASSFICATE_2);
 	}else{
 		if(m_start == true){
 			this.onStartRotate();

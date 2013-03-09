@@ -3,7 +3,10 @@
 public var showNumber:GameObject;
 public var questionList:GameObject;
 public var itemPrefab:GameObject;
+
 public var hotlinePanel:GameObject;
+public var phonePanel:GameObject;
+
 
 private var mQuestions:List.<Question>;
 
@@ -11,17 +14,46 @@ private var mCurrentIndex:int = 0;
 
 private var mFirstPhaseQuestionNumber:int = 5;
 private var m_score:int = 0;
-
+public static var PHONE_PANEL:String = "phone";
+public static var HOT_LINE_PANEL:String = "hotline";
 
 
 function Start () {
+	
+	initPhone();
+	initHotLinePanel();
+}
+
+function initPhone():void{
 	if(showNumber){
 		var label:UILabel = showNumber.GetComponent("UILabel");
 		label.text = "";	
 	}
+	phonePanel.active = false;
+	phonePanel.SetActiveRecursively(false);
+	phonePanel.transform.localPosition = new Vector3(0,0,0);
+}
+
+function initHotLinePanel():void{
 	if(hotlinePanel){
-		hotlinePanel.transform.localPosition.x = 10000;
-		
+		// hotlinePanel.transform.localPosition.x = 10000;
+		hotlinePanel.active = false;
+		hotlinePanel.SetActiveRecursively(false);	
+		hotlinePanel.transform.localPosition = new Vector3(0,0,0);
+	}
+}
+
+function show(name:String):void{
+	hotlinePanel.active = false;
+	hotlinePanel.SetActiveRecursively(false);	
+	phonePanel.active = false;
+	phonePanel.SetActiveRecursively(false);
+	if(PHONE_PANEL == name){
+		phonePanel.active = true;
+		phonePanel.SetActiveRecursively(true);
+	}else{
+		hotlinePanel.active = true;
+		hotlinePanel.SetActiveRecursively(true);
 	}
 }
 
@@ -35,45 +67,29 @@ function onLoadDataComplete () {
 }
 
 function setData(questionDataList:List.<Question>):void{
-	var grid:UITable = questionList.GetComponent("UITable") as UITable;
+	var grid:UIGrid = questionList.GetComponent("UIGrid") as UIGrid;
 
 	var gridTransform:Transform = grid.transform;
 	for(var i:int = 0;i<gridTransform.childCount;i++){
 		var child:Transform = gridTransform.GetChild(i);
 		Destroy(child.gameObject);
 	}
-	//var index:int = 0;
+	var index:int = questionDataList.Count;
 	for(var itemData:Question in questionDataList){
 		var item:GameObject = Instantiate(itemPrefab);
 		item.transform.parent = questionList.transform;
-		//item.name = "question_"+index++;
+		item.name = "question_"+index--;
 		item.transform.localScale = new Vector3(1,1,1);
 		item.transform.localPosition = new Vector3(0,0,0);
+		item.AddComponent(UIDragPanelContents);
+		var label:UILabel =item.GetComponent(UILabel);
 		var itemDataComponent:HotLineQuestionItem_Controller = item.GetComponent(HotLineQuestionItem_Controller) as HotLineQuestionItem_Controller;
 		itemDataComponent.questionData = itemData;
-		// itemDataComponent.SetCheckBox(setCheckbox);
 		itemDataComponent.label.text = itemData.text;
 	}
 	grid.Reposition();
 	
 	UIManager.getInstance().ChangeLayersRecursively(gameObject.transform,"uilayer");
-}
-
-
-public function getFirstPhaseQuestionsData():Question[]{
-	var resultList:Question[]  = new Question[mFirstPhaseQuestionNumber];
-	
-	(mQuestions as List.<Question>).CopyTo(0,resultList,0,mFirstPhaseQuestionNumber);
-	//.CopyTo(m_startIndex,resultList,0,4);
-	return resultList;
-}
-
-public function getSecondPhaseQuestionsData():Question[]{
-	var resultList:Question[]  = new Question[3];
-	
-	(mQuestions as List.<Question>).CopyTo(5,resultList,0,3);
-	//.CopyTo(m_startIndex,resultList,0,4);
-	return resultList;
 }
 
 function pressKey_0():void{
@@ -130,64 +146,16 @@ function onPressCall():void{
 	var label:UILabel = showNumber.GetComponent("UILabel");
 	var str:String = label.text ;
 	if(str == "120"){
-		
 		UIManager.getInstance().addScore(3);
 	}
-	hotlinePanel.transform.localPosition.x = -140;
-	// hotlinePanel.active = true;
-	// hotlinePanel.SetActiveRecursively(true);
+	//hotlinePanel.transform.localPosition.x = -140;
+	show(HOT_LINE_PANEL);
 }
 
 function onPressQuit():void{
 	Debug.Log("press quit");
 	// var callBackComponent:SetCallBack = gameObject.GetComponent("SetCallBack");
 	// callBackComponent.execute();
-}
-
-function onDownPage():void{
-	// var secondQuestionDatas:Question[] = getSecondPhaseQuestionsData();
-	// setData(secondQuestionDatas);
-	// questionList.transform.localPosition.y+=50;
-	/*
-	mCurrentIndex++;
-	if(mCurrentIndex>7){
-		mCurrentIndex = 7;
-	}
-	showQuestion(mCurrentIndex);
-	*/
-	if(questionList.transform.localPosition.y >=220){
-		return;
-	}
-	questionList.transform.localPosition.y +=20;
-
-
-}
-function onUpPage():void{
-	
-	
-	// mCurrentIndex--;
-	// if(mCurrentIndex<0){
-	// 	mCurrentIndex = 0;
-	// }
-	// showQuestion(mCurrentIndex);
-	if(questionList.transform.localPosition.y <40){
-		return;
-	}
-	questionList.transform.localPosition.y -=20;
-}
-
-function showQuestion(index:int):void{
-	Debug.Log("callHotLine::showQuestion = " + index+",questionList.transform.childCount = "+questionList.transform.childCount);
-	for(var i:int = 0;i<questionList.transform.childCount;i++){
-		var child:Transform = questionList.transform.GetChild(i);		
-		child.localPosition.y = 0;	
-		if(index == i){
-			child.localPosition.x = 0;	
-		}else{
-			child.localPosition.x = 10000;	
-		}	
-	}
-
 }
 
 function onConfim():void{
@@ -199,6 +167,7 @@ function onConfim():void{
 		
 		if(checkbox.isChecked){
 			var qData:Question = itemDataComponent.questionData ;
+			Debug.Log("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"+ qData.answer);
 			if(qData.answer == "right"){
 				m_score += qData.score;
 				rightNumber++;
@@ -208,11 +177,12 @@ function onConfim():void{
 	UIManager.getInstance().addScore(m_score);
 	// Debug.Log("m_score = "+ m_score);
 	if(rightNumber == 0){
-		UIManager.getInstance().showCallHotLineResult("基本不明白");
+		Debug.Log("rightNumber = "+ rightNumber);
+		UIManager.getInstance().showCallHotLineResult(CallHotLineResult_Controller.RESULT_ANSWER_2);
 	}else if(rightNumber == 4){
-		UIManager.getInstance().showCallHotLineResult("完全明白");
+		UIManager.getInstance().showCallHotLineResult(CallHotLineResult_Controller.RESULT_ANSWER_0);
 	}else{
-		UIManager.getInstance().showCallHotLineResult("基本明白");
+		UIManager.getInstance().showCallHotLineResult(CallHotLineResult_Controller.RESULT_ANSWER_1);
 	}
 
 	//UIManager.getInstance().nextDialog();

@@ -11,37 +11,23 @@ function Start(){
 
 
 function Update():void{
-	return;
-	if(gameObject.transform){
-		// currentAngle = iTween.FloatUpdate(currentAngle, targetAngle, 3);
-		// var result:Number = Mathf.Abs(transform.localRotation.z - currentAngle );
-		
-		// if(transform.eulerAngles.z >=targetAngle){
-		// 	//currentAngle = 0;
-		// 	return;
-		// }
-		
-		if(m_start == false){
-
-		}else{
-			currentAngle = iTween.FloatUpdate(currentAngle, targetAngle, 3);
-			transform.RotateAround(transform.position,Vector3.forward,currentAngle);
-		}
+	
+	if(m_start){
+		currentAngle--;
+		transform.localEulerAngles.z = currentAngle;	
 	}
-  
-
-    //GUI.matrix = matrixBackup;
+	else{
+		currentAngle = transform.localEulerAngles.z;
+	}
 
 }
 public function StartRotate():void{
-	Debug.Log("OnClick.........");
-	currentAngle =currentAngle + 1801;
+	currentAngle = transform.localEulerAngles.z;
 	m_start = true;
-	iTween.RotateTo(gameObject,iTween.Hash("z",currentAngle,"name","rotate","time",2,"delay",0.1,"transition","easeInOutCubic"));
 	
 }
 
 public function StopRotate():void{
 	m_start = false;
-	iTween.StopByName("rotate");
+	
 }

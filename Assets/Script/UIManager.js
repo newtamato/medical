@@ -29,6 +29,8 @@ private var mDialogIndex:int = 0;
 private var m_score:int = 0;
 private var m_operation:String="";
 
+private var m_finishedDialog:Array ;
+
 public static function getInstance():UIManager{
 	return m_instance;
 }
@@ -37,6 +39,9 @@ public static function getInstance():UIManager{
 function Start () {
 
 	mDialogQueue = new Array();
+
+	m_finishedDialog = new Array();
+
 	m_instance = this;
 	avtiveAllDialogToGetDataCompleteEvent();
 
@@ -48,6 +53,7 @@ function Start () {
 }
 
 function setDialogQueue(queue:Array):void{
+	mDialogIndex = 0;
 	mDialogQueue = queue;
 }
 function nextDialog():void{
@@ -61,7 +67,8 @@ function nextDialog():void{
 		showDialog(UI_SCORE);
 		var scoreComponent:ScoreDialog_Controller = dialog_score.GetComponent(ScoreDialog_Controller) as ScoreDialog_Controller;
 		if(scoreComponent){
-			scoreComponent.setScore(getScore());
+			var score:int = getScore();
+			scoreComponent.show(true,score);
 		}
 		return;
 	}
@@ -70,6 +77,25 @@ function nextDialog():void{
 	
 	showDialog(dialogName);
 	mDialogIndex++;
+}
+
+function addFinishedDialog(name:String):void{
+	
+	if(isFinished(name)){
+		return ;
+	}
+	m_finishedDialog.push(name);
+}
+
+function isFinished(dialogName:String):boolean{
+	var count:int = m_finishedDialog.length;
+	for(var index:int = 0; index < count ; index ++){
+		if(dialogName == m_finishedDialog[index]){
+			return true;
+		}
+	}
+	
+	return false;
 }
 function addScore(score:int):void{
 	m_score +=score;
@@ -129,33 +155,42 @@ public function showDialog(dialigName:String):void{
 	if(dialigName == UI_MENU){
 		dialog_menu.transform.localPosition.x = 0;
 		dialog_menu.transform.localPosition.y = 0;	
+		var menu:MenuDialog_Controller = dialog_menu.GetComponent(MenuDialog_Controller);
+		menu.show();
 	}
 	if(dialigName == UI_HOT_LINE){
 		dialog_hotline.transform.localPosition.x = 0;
 		dialog_hotline.transform.localPosition.y = 0;	
+		var ctrl:CallHotLine_Controller = dialog_hotline.GetComponent(CallHotLine_Controller);
+		ctrl.show(CallHotLine_Controller.PHONE_PANEL );
 	}
 	
 	if(dialigName == UI_ESTIMATE){
 		dialog_estiamte.transform.localPosition.x = 0;
-		dialog_estiamte.transform.localPosition.y = 0;	
+		dialog_estiamte.transform.localPosition.y = 30;	
 	}
 	
 	if(dialigName == UI_CLASSFICATE_1){
 		dialog_classfication_1.transform.localPosition.x = 0;
-		dialog_classfication_1.transform.localPosition.y = 0;	
+		dialog_classfication_1.transform.localPosition.y = 30;	
 	}
 
 	if(dialigName == UI_CLASSFICATE_2){
-		dialog_classfication_2.transform.localPosition.x = 0;
-		dialog_classfication_2.transform.localPosition.y = 107;	
+		dialog_classfication_2.transform.localPosition.x = 70;
+		dialog_classfication_2.transform.localPosition.y = 10;
+
+		var class_ctrl:Classficate_Dialog_Controller = dialog_classfication_2.GetComponent(Classficate_Dialog_Controller);
+		class_ctrl.show();	
 	}
 	if(dialigName == UI_SCORE){
-		dialog_score.transform.localPosition.x = 0;
-		dialog_score.transform.localPosition.y = 0;	
+		dialog_score.transform.localPosition.x = 234;
+		dialog_score.transform.localPosition.y = 72;	
 	}
 	if(dialigName == UI_SECURITY){
 		dialog_tool.transform.localPosition.x = 370.5782;
 		dialog_tool.transform.localPosition.y = -261.0464;
+		var controller:Tool_Controller = dialog_tool.GetComponent(Tool_Controller);
+		controller.changeTheMainCamera();
 	}
 }
 
@@ -174,4 +209,14 @@ public function ChangeLayersRecursively(trans : Transform,name : String)
         child.gameObject.layer = LayerMask.NameToLayer(name);
         ChangeLayersRecursively(child, name);
     }
+}
+
+public  function findTransformByName(name:String,parent:Transform):Transform{
+	for(var child:Transform in parent){
+		Debug.Log("child.gameObject.name = "+ child.gameObject.name);
+		if(child.gameObject.name == name){
+			return child;
+		}
+	}
+	return null;
 }

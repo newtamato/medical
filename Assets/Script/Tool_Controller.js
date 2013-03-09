@@ -1,7 +1,7 @@
 #pragma strict
 
 private var m_current:String;
-
+public var layer:GameObject;
 
 function Start () {
 
@@ -28,6 +28,19 @@ public function onSelectDun():void{
 }
 
 public function onComplete():void{
+	if(layer){
+		var barrier:setRoadBarrier = layer.GetComponent(setRoadBarrier);
+		barrier.computerScore();
+	}
+	
 	Global.getInstance().setCurrentState(Global.UI);
 	UIManager.getInstance().nextDialog();	
+	UIManager.getInstance().addFinishedDialog(UIManager.UI_SECURITY);	
+	
+}
+
+public function changeTheMainCamera():void{
+	Camera.main.fieldOfView = 43;
+	Camera.main.transform.localPosition = new Vector3(30,38,0);
+	Camera.main.transform.localEulerAngles = new Vector3(34,326,357);
 }

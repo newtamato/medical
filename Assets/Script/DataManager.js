@@ -5,6 +5,7 @@ import System.Xml.Serialization;
 import System.IO;
 import System.Text;
 import System.Collections.Generic;
+
 // Anything we want to store in the XML file, we define it here
 
 
@@ -204,19 +205,18 @@ function LoadXML()
 {
    Debug.Log("_FileLocation = "+_FileLocation);
    
-   var webReq:WWW = new WWW(_FileLocation+"/"+ _FileName);
+   // var webReq:WWW = new WWW(_FileLocation+"/"+ _FileName);
 
-   yield  webReq;
+   // yield  webReq;
 
-   _data = webReq.text;
+   // _data = webReq.text;
 
-   // var r : StreamReader = File.OpenText(_FileLocation+"/"+ _FileName);
-   // var _info : String = r.ReadToEnd();
-   // r.Close();
-   // _data=_info;
+   var r : StreamReader = File.OpenText(_FileLocation+"/"+ _FileName);
+   var _info : String = r.ReadToEnd();
+   r.Close();
+   _data=_info;
    if(_data )
    {
-      Debug.Log("KKKKKKKK");
       
       myData = DeserializeObject(_data);
       // set the players position to the data we loaded
@@ -240,4 +240,13 @@ function LoadXML()
    //  r.Close();
    // _data=_info;
    
+}
+static function RandomizeBuiltinArray(arr : Object[])
+{
+    for (var i = arr.Length - 1; i > 0; i--) {
+        var r = UnityEngine.Random.Range(0,i);
+        var tmp = arr[i];
+        arr[i] = arr[r];
+        arr[r] = tmp;
+    }
 }

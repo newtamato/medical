@@ -36,6 +36,6 @@ function onMouseOverHandle():void{
 	if(null!= m_callBack){
 		m_callBack(m_id,m_msg,gameObject.name,gameObject);
 	}
-	
+	Debug.Log("XXDXDDDDDDDDDDDDDDDDASDFASDFASDFASD");
 	BroadcastMessage("onMouseOverToPatientItem","@@@@@@@@",SendMessageOptions.DontRequireReceiver);
 }

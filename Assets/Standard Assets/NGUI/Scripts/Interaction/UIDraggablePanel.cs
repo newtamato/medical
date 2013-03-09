@@ -351,6 +351,7 @@ public class UIDraggablePanel : IgnoreTimeScale
 		DisableSpring();
 
 		Bounds b = bounds;
+		Debug.Log("[UIDraggablePanel][SetDragAmount]");
 		if (b.min.x == b.max.x || b.min.y == b.max.x) return;
 		Vector4 cr = mPanel.clipRange;
 
@@ -386,7 +387,7 @@ public class UIDraggablePanel : IgnoreTimeScale
 		cr.x = ox;
 		cr.y = oy;
 		mPanel.clipRange = cr;
-
+		Debug.Log("onScrollChange::cr = "+cr);
 		// Update the scrollbars, reflecting this change
 		if (updateScrollbars) UpdateScrollbars(false);
 	}

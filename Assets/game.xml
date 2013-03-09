@@ -29,12 +29,12 @@
         <Question id="op_3" answer="right" score="3" text="受伤人数及主要伤情"></Question>
         <Question id="op_4" answer="wrong" score="0" text="事故现场围观人群的情况"></Question>
         <Question id="op_5" answer="wrong" score="0" text="事故现场街道居民的情况"></Question>
-        <Question id="op_6" answer="right" score="9" text="在幸福路133号胜利中学"></Question>
-        <!--往南200米的丁字口，有一辆大客车和一辆商务车相撞，初步判断大概有十二三名伤员，1-2名重度伤员，3-4名中度受伤者，多为骨折伤员，7-8名轻伤员-->
-        <Question id="op_7" answer="wrong" score="0" text="在幸福路，有车辆相撞"></Question>
-        <!--有很多人受伤，大多数人都是公务员，围观人群有老人、青壮年、儿童，大多数不愿意为伤员提供救助。 -->
-        <Question id="op_8" answer="wrong" score="0" text="在胜利中学附近，发生撞车，"></Question>
-        <!--初步判断大概有十二三名伤员，他们的姓名是张三、李四……，街道居民大多为外来务工者，文化水平较低，急救知识技能缺乏。 -->
+        <Question id="op_6" answer="right" score="9" text="在幸福路133号胜利中学,往南200米的丁字口，有一辆大客车和一辆商务车相撞，初步判断大概有十二三名伤员，1-2名重度伤员，3-4名中度受伤者，多为骨折伤员，7-8名轻伤员"></Question>
+        <!---->
+        <Question id="op_7" answer="wrong" score="0" text="在幸福路，有车辆相撞,有很多人受伤，大多数人都是公务员，围观人群有老人、青壮年、儿童，大多数不愿意为伤员提供救助。"></Question>
+        <!-- -->
+        <Question id="op_8" answer="wrong" score="0" text="在胜利中学附近，发生撞车，初步判断大概有十二三名伤员，他们的姓名是张三、李四……，街道居民大多为外来务工者，文化水平较低，急救知识技能缺乏。"></Question>
+        <!-- -->
         
       </Questions>
     </Dialog>

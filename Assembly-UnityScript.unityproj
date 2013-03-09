@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{F0E54105-3EAD-47AC-C729-1615D1E21CBD}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-UnityScript</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_1;UNITY_4_0;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Script\AtlasManager.js" />
+     <Compile Include="Assets\Script\BaseDialog.js" />
+     <Compile Include="Assets\Script\CallHotLineResult_Controller.js" />
+     <Compile Include="Assets\Script\CallHotLine_Controller.js" />
+     <Compile Include="Assets\Script\Classficate_Dialog_Controller.js" />
+     <Compile Include="Assets\Script\DataManager.js" />
+     <Compile Include="Assets\Script\EstiamateItem_Controller.js" />
+     <Compile Include="Assets\Script\EstimateDialog_1_Item_Controller.js" />
+     <Compile Include="Assets\Script\EstimateSmallItem_Controller.js" />
+     <Compile Include="Assets\Script\EstimateStiuation_Controller.js" />
+     <Compile Include="Assets\Script\Global.js" />
+     <Compile Include="Assets\Script\HotLineQuestionItem_Controller.js" />
+     <Compile Include="Assets\Script\LookAtCamera.js" />
+     <Compile Include="Assets\Script\MakeChoiceItem_Controller.js" />
+     <Compile Include="Assets\Script\MakeChoiceToSave_Controller.js" />
+     <Compile Include="Assets\Script\MakeOrderDialog_Controller.js" />
+     <Compile Include="Assets\Script\MakeOrder_Controller.js" />
+     <Compile Include="Assets\Script\MenuDialog_Controller.js" />
+     <Compile Include="Assets\Script\PatientItem_Controller.js" />
+     <Compile Include="Assets\Script\Return_Controller.js" />
+     <Compile Include="Assets\Script\ScoreDialog_Controller.js" />
+     <Compile Include="Assets\Script\SetCallBack.js" />
+     <Compile Include="Assets\Script\TileController.js" />
+     <Compile Include="Assets\Script\TileManager.js" />
+     <Compile Include="Assets\Script\Tip_Controller.js" />
+     <Compile Include="Assets\Script\Tool_Controller.js" />
+     <Compile Include="Assets\Script\UIManager.js" />
+     <Compile Include="Assets\Script\itweenscript\RotatingUnityGUI.js" />
+     <Compile Include="Assets\Script\setRoadBarrier.js" />
+     <Compile Include="Assets\Script\walkWithMouseClick.js" />
+     <Compile Include="Assets\Script\walkWithMouseClick1.js" />
+     <None Include="Assets\Standard Assets\NGUI\Resources\Shaders\Depth.shader" />
+     <None Include="Assets\Dialog\callHotLineResult.txt" />
+     <None Include="Assets\Dialog\openBox.txt" />
+     <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
+     <None Include="Assets\Dialog\security.txt" />
+     <None Include="Assets\Dialog\classficate_dialog_2.txt" />
+     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
+     <None Include="Assets\Dialog\ui_tp.txt" />
+     <None Include="Assets\Standard Assets\NGUI\Resources\Shaders\Unlit - Masked Colored.shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
+     <None Include="Assets\Standard Assets\iTween\ReadMe!\ReadMe!.txt" />
+     <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
+     <None Include="Assets\SaveData.xml" />
+     <None Include="Assets\Dialog\classficate_dialog_1.txt" />
+     <None Include="Assets\Dialog\avatar.txt" />
+     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\Standard Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
+     <None Include="Assets\Fonts\3698\3698font.txt" />
+     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
+     <None Include="Assets\Dialog\buttons.txt" />
+     <None Include="Assets\Dialog\estimate_dialog.txt" />
+     <None Include="Assets\NGUI\ReadMe - 2.0.3d.txt" />
+     <None Include="Assets\Standard Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
+     <None Include="Assets\Standard Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (HardClip).shader" />
+     <None Include="Assets\Standard Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored Overlay.shader" />
+     <None Include="Assets\NGUI\Examples\Other\English.txt" />
+     <None Include="Assets\NGUI\Examples\Other\French.txt" />
+     <None Include="Assets\game.xml" />
+     <None Include="Assets\Standard Assets\NGUI\Resources\Shaders\Unlit - Additive Colored.shader" />
+     <None Include="Assets\Dialog\score.txt" />
+     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
+     <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
+     <None Include="Assets\Standard Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
+     <None Include="Assets\Dialog\3_5_Texture.txt" />
+     <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{DD2E181F-3F97-EEA8-C996-EC6301DA893D}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
+      <Project>{38F32991-343F-CA8B-6157-B272350B0AC7}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
