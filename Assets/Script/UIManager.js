@@ -24,6 +24,12 @@ public var dialog_score:GameObject;
 public var dialog_callHotLineResult:GameObject;
 public var dialog_tool:GameObject;
 
+
+public var scene:GameObject;
+public var map:GameObject;
+public var avators:GameObject[];
+
+
 private var mDialogQueue:Array;
 private var mDialogIndex:int = 0;
 private var m_score:int = 0;
@@ -45,11 +51,16 @@ function Start () {
 	m_instance = this;
 	avtiveAllDialogToGetDataCompleteEvent();
 
-	showDialog(UI_MENU);
+	showDialog(UI_MENU,0);
 
 	Global.getInstance().setCurrentState(Global.UI);
 
 	DataManager.getInstance().startLoadData();	
+}
+function Awake():void{
+	DontDestroyOnLoad( transform.gameObject);
+	
+
 }
 
 function setDialogQueue(queue:Array):void{
@@ -64,7 +75,7 @@ function nextDialog():void{
 
 	if(mDialogQueue.length<=mDialogIndex){
 
-		showDialog(UI_SCORE);
+		showDialog(UI_SCORE,0);
 		var scoreComponent:ScoreDialog_Controller = dialog_score.GetComponent(ScoreDialog_Controller) as ScoreDialog_Controller;
 		if(scoreComponent){
 			var score:int = getScore();
@@ -75,10 +86,20 @@ function nextDialog():void{
 	Debug.Log("UIManager::nextDialog dialogName is "+ mDialogIndex);
 	var dialogName:String = mDialogQueue[mDialogIndex];
 	
-	showDialog(dialogName);
+	showDialog(dialogName,0);
 	mDialogIndex++;
 }
-
+function clearAll(){
+	mDialogQueue = [];
+	mDialogIndex = 0;
+	activeSceneAndDeactiveMap(true);
+	clearMap();
+}
+public function clearMap():void{
+	var mapTrans:Transform =findTransformByName("mapTileContainer",map.transform);
+	var tileManager:TileManager =mapTrans.transform.GetComponent(TileManager);
+	tileManager.clearMap();
+}
 function addFinishedDialog(name:String):void{
 	
 	if(isFinished(name)){
@@ -139,6 +160,26 @@ function clearAllDialog():void{
 	dialog_score.transform.localPosition.x = 10000;
 	dialog_callHotLineResult.transform.localPosition.x = 10000;
 	dialog_tool.transform.localPosition.x = 10000;
+
+
+}
+
+function activeSceneAndDeactiveMap(activeScene:boolean):void{
+	if(scene.active == activeScene){
+		return;
+	}
+	scene.active = activeScene;
+	scene.SetActiveRecursively(activeScene);
+	for (var go:GameObject in avators){
+		go.active = activeScene;
+		go.SetActiveRecursively(activeScene);
+	}
+	map.active = !activeScene;
+	map.SetActiveRecursively(!activeScene);
+
+	if(activeScene == false){
+		Camera.main.fieldOfView = 48;
+	}
 }
 
 function showCallHotLineResult(str:String):void{
@@ -150,7 +191,7 @@ function showCallHotLineResult(str:String):void{
 	callResultComponent.showMassage(str);
 }
 
-public function showDialog(dialigName:String):void{
+public function showDialog(dialigName:String,score:int):void{
 	clearAllDialog();
 	if(dialigName == UI_MENU){
 		dialog_menu.transform.localPosition.x = 0;
@@ -180,6 +221,7 @@ public function showDialog(dialigName:String):void{
 		dialog_classfication_2.transform.localPosition.y = 10;
 
 		var class_ctrl:Classficate_Dialog_Controller = dialog_classfication_2.GetComponent(Classficate_Dialog_Controller);
+		class_ctrl.setScore(score);
 		class_ctrl.show();	
 	}
 	if(dialigName == UI_SCORE){
@@ -187,10 +229,20 @@ public function showDialog(dialigName:String):void{
 		dialog_score.transform.localPosition.y = 72;	
 	}
 	if(dialigName == UI_SECURITY){
-		dialog_tool.transform.localPosition.x = 370.5782;
+		
+		dialog_tool.transform.localPosition.x = 400;
 		dialog_tool.transform.localPosition.y = -261.0464;
-		var controller:Tool_Controller = dialog_tool.GetComponent(Tool_Controller);
-		controller.changeTheMainCamera();
+
+		// var controller:Tool_Controller = dialog_tool.GetComponent(Tool_Controller);
+		// controller.changeTheMainCamera();
+
+		activeSceneAndDeactiveMap(false);
+		// scene.active = false;
+		// scene.SetActiveRecursively(false);
+
+		// map.active = false;
+		// map.SetActiveRecursively(false);
+
 	}
 }
 
@@ -220,3 +272,16 @@ public  function findTransformByName(name:String,parent:Transform):Transform{
 	}
 	return null;
 }
+
+public function clearnChildren(parent:Transform):void{
+	var childCount:int = parent.childCount;
+	childCount = parent.childCount;
+	for(var index:int = 0 ;index<childCount; index++){
+		var child:Transform = parent.GetChild(index);
+		if(child ){
+			Destroy(child.gameObject);
+		}
+	}
+	parent.DetachChildren();
+}
+

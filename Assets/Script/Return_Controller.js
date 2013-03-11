@@ -5,5 +5,6 @@ function Start () {
 }
 
 function returnBack () {
-	UIManager.getInstance().showDialog(UIManager.UI_MENU);
+	UIManager.getInstance().clearAll();
+	UIManager.getInstance().showDialog(UIManager.UI_MENU,0);
 }

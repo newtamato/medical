@@ -14,8 +14,8 @@ function Start () {
 	
 }
 
-function Update () {
-
+function Awake():void{
+	DontDestroyOnLoad(transform.gameObject);
 }
 
 function onOkBtn():void{
@@ -49,7 +49,14 @@ function init():void{
 	if(null == dataList){
 		return;
 	}
+	
 	var grid:UIGrid = estimateList.GetComponent("UIGrid") as UIGrid;
+	// var childCount:int = grid.transform.childCount;
+	// if(childCount == dataList.Count){
+	// 	return;
+	// }
+	UIManager.getInstance().clearnChildren(grid.transform);
+
 	var img:UISprite =null;
 	var index:int = 0;
 	for (var itemdata:Question in dataList){
@@ -61,8 +68,10 @@ function init():void{
 			var dataComponent:DataItem_Controller = item.GetComponent(DataItem_Controller) as DataItem_Controller;
 			dataComponent.id = itemdata.id;
 			dataComponent.image = itemdata.image_1;
+
 			
 			item.transform.parent = grid.transform;		
+
 			item.name = "estimate_item_"+ index;
 			var displayComponent:EstiamateItem_Controller = item.GetComponent(EstiamateItem_Controller) as EstiamateItem_Controller;
 		 	img=displayComponent.img;
@@ -76,34 +85,22 @@ function init():void{
 			item.transform.localPosition = new Vector3(1,1,1);
 		}
 	}
-	
+	UIManager.getInstance().ChangeLayersRecursively(grid.transform,"uilayer");
 	grid.Reposition();
 	//estimateList.transform.localPosition.z = -1;
 
 	//init valid list
+
 	var validListGrid:UITable = validList.GetComponent("UITable") as UITable;
 	var tableTrans:Transform = validListGrid.transform;
-	var i:int = 0;
-	var child:Transform =null;
-	for (i = 0; i < tableTrans.childCount; ++i)
-	{
-		child= tableTrans.GetChild(i);
-
-		Destroy(child.gameObject);
-		
-	}
+	UIManager.getInstance().clearnChildren(tableTrans);
 
 
 	//init invalid list
 	var invalidListTable:UITable = invalidList.GetComponent("UITable") as UITable;
 	var invalidListTableTransform:Transform = invalidListTable.transform;
-	for (i = 0; i < invalidListTableTransform.childCount; ++i)
-	{
-		child = invalidListTableTransform.GetChild(i);
+	UIManager.getInstance().clearnChildren(invalidListTableTransform);
 
-		Destroy(child.gameObject);
-		
-	}
 
 }
 function setData(data:List.<Question>):void{

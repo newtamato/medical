@@ -56,9 +56,17 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":105},
 	"sourceSize": {"w":105,"h":105}
 },
-"yellowBack.png":
+"unselected.png":
 {
 	"frame": {"x":1535,"y":2,"w":105,"h":105},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":105},
+	"sourceSize": {"w":105,"h":105}
+},
+"yellowBack.png":
+{
+	"frame": {"x":1642,"y":2,"w":105,"h":105},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":105},
@@ -71,6 +79,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:34c38b61a1ca9b5c80e2184cf995e08a$"
+	"smartupdate": "$TexturePacker:SmartUpdate:806d53e2b7c0ae463190651c7ee4c4ef$"
 }
 }

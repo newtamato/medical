@@ -46,6 +46,10 @@ function Start () {
 	setVisible(false);
 }
 
+function Awake():void{
+	DontDestroyOnLoad(transform.gameObject);
+}
+
 function show():void{
 	Debug.Log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 	setOptionImgBack();
@@ -97,8 +101,8 @@ function onSelectEstimate():void{
 }
 //选择隔离安全带
 function onSelectSecurityLine():void{
-	//onSelectOption(UIManager.UI_SECURITY,option_3_img);//选择隔离安全带的处理
-	Application.LoadLevel("demo2");
+	onSelectOption(UIManager.UI_SECURITY,option_3_img);//选择隔离安全带的处理
+	
 }
 	
 //选择“分类”
@@ -153,7 +157,6 @@ function onConfim():void{
 			Debug.Log("Your answer is right!!");		
 			UIManager.getInstance().addScore(score);	
 		}
-		
 	}
 
 	if(dialogNames.length>0){

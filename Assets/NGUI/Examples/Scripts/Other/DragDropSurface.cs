@@ -34,7 +34,10 @@ public class DragDropSurface : MonoBehaviour
 			DataItem_Controller dataComponent = null;
 			if(container){
 				container.spriteName = data.image;
-				dataComponent = gameObject.AddComponent<DataItem_Controller>();
+				dataComponent = gameObject.GetComponent<DataItem_Controller>();
+				if(null == dataComponent){
+					dataComponent=gameObject.AddComponent<DataItem_Controller>();
+				}
 				if(dataComponent && data){
 					dataComponent.id = data.id;
 					dataComponent.image = data.image;
@@ -44,6 +47,7 @@ public class DragDropSurface : MonoBehaviour
 					SendMessageUpwards("onDropToChangeDisplay",SendMessageOptions.DontRequireReceiver);
 				}	
 			}else{
+				Debug.Log("@#########################$$$$$$$$$$$$$");
 				GameObject child = NGUITools.AddChild(gameObject, ddo.prefab);
 			
 				dataComponent = child.AddComponent<DataItem_Controller>();

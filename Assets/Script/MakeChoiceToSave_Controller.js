@@ -10,19 +10,16 @@ private var m_putCount:int = 0;
 
 
 
-function Update () {
-	
-	var children:DataItem_Controller[] = orderList.GetComponentsInChildren(DataItem_Controller);
+function Awake():void{
+	DontDestroyOnLoad(transform.gameObject);
+}
 
-	var excludeData:Array = [];
-	for(var child:DataItem_Controller in children){
-		var data:Question = getQuestionById(child.id);
-		if(data!=null){
-			continue;
-		}else{
-			excludeData.push(child.id);
-		}
+function updateOriginListPresent(data : List.<Question>):void{
+	for(var q:Question in data){
+		createItemForQuestionList(q);
 	}
+	var orderList:UITable = orderList.GetComponent("UITable") as UITable;
+	orderList.Reposition();
 }
 
 function onLoadDataComplete():void{
@@ -50,35 +47,102 @@ function initDialogList():void{
 		
 		var itemData:Question = m_dataList[index];
 
-		var itemDisplay:GameObject = null;
-		itemDisplay = Instantiate(itemPrefab);
-		itemDisplay.transform.parent = orderList.transform;		
-		itemDisplay.transform.localScale = new Vector3(1,1,1);
-		itemDisplay.transform.localPosition = new Vector3(0,0,0);
-		itemDisplay.name = itemData.id;
-		
-
-		var displayComponent: UISprite = itemDisplay.GetComponent( UISprite) as  UISprite;
-		if(itemData){
-			displayComponent.spriteName = itemData.image;		
-		}
-		var dataComponent:DataItem_Controller = itemDisplay.GetComponent(DataItem_Controller) as DataItem_Controller;
-		if(null == dataComponent){
-			dataComponent = itemDisplay.AddComponent(DataItem_Controller);
-			dataComponent.id = itemData.id;
-			dataComponent.image = itemData.image;
-			dataComponent.tag = "estimate_item_1_tag";
-		}
+		createItemForQuestionList(itemData);
 		
 	}
 	var orderList:UITable = orderList.GetComponent("UITable") as UITable;
 	orderList.Reposition();
 }
 
+function createItemForQuestionList(itemData:Question):void{
+	var itemDisplay:GameObject = null;
+	itemDisplay = Instantiate(itemPrefab);
+	itemDisplay.transform.parent = orderList.transform;		
+	itemDisplay.transform.localScale = new Vector3(1,1,1);
+	itemDisplay.transform.localPosition = new Vector3(0,0,0);
+	itemDisplay.name = itemData.id;
+	
+
+	var displayComponent: UISprite = itemDisplay.GetComponent( UISprite) as  UISprite;
+	if(itemData){
+		displayComponent.spriteName = itemData.image;		
+	}
+	var dataComponent:DataItem_Controller = itemDisplay.GetComponent(DataItem_Controller) as DataItem_Controller;
+	if(null == dataComponent){
+		dataComponent = itemDisplay.AddComponent(DataItem_Controller);
+		dataComponent.id = itemData.id;
+		dataComponent.image = itemData.image;
+		dataComponent.tag = "estimate_item_1_tag";
+	}
+}
+function getDataCtrlComponentCount(parent:Transform):Array{
+		var index:int = 0;
+		var ctrl_array:Array=[];
+		for(var child:Transform in parent){
+			var ctrl:DataItem_Controller = child.GetComponent(DataItem_Controller);
+			if(ctrl){
+				ctrl_array.push(ctrl);
+			}
+		}
+		return ctrl_array;
+}
 function onDropToChangeDisplay(){
 	// var orderList:UITable = originList.GetComponent("UITable") as UITable;
 	// orderList.Reposition();	
-	m_putCount++;
+	if(null == orderList){
+		return;
+	}
+	
+	// Debug.Log("XX@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ = "+ index);
+
+	var originList_children:Array = getDataCtrlComponentCount(originList.transform);
+	var improve_originList_children:Array =  [];
+	Debug.Log("XX@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ = "+ originList_children.length);
+	for(var child:DataItem_Controller in originList_children){
+		Debug.Log("child.gameObject.name===="+child.gameObject.name+",id = "+child.id);
+
+		if(child.gameObject.name.IndexOf("op_")!=-1){
+			continue;
+		}else{
+			improve_originList_children.push(child);
+		}
+	}
+	if(improve_originList_children.length == 0){
+		return ;
+	}
+	var orderList_children:Array= getDataCtrlComponentCount (orderList.transform );
+	
+	Debug.Log("originList_children.length  = "+originList_children.length );
+	Debug.Log("orderList_children.length =  "+orderList_children.length);
+	if((originList_children.length +  orderList_children.length) == m_dataList.Count){
+		return ;
+	}
+	
+	clearnChildren(orderList.transform);
+	
+	var destination:List.<Question> = new List.<Question>();
+	//m_dataList.CopyTo(destination);
+	destination.AddRange(m_dataList);
+	var excludeData:Array = [];
+	for(var child:DataItem_Controller in originList_children){
+		Debug.Log(child.gameObject.name+";;;;;;;;;;;;;;;;;;;;");
+		var data:Question = getQuestionById(child.id,destination);
+		if(data!=null){
+			Debug.Log("remove "+ child.id);
+			destination.Remove(data);
+			continue;
+		}else{
+			excludeData.push(child.id);
+		}
+	}
+	
+	// originList.transform.DetachChildren();
+	Debug.Log(destination);
+	updateOriginListPresent(destination);
+	
+	
+	
+	//m_putCount++;
 }
 
 function onCancle():void{
@@ -88,54 +152,70 @@ function onCancle():void{
 	for(var index:int = 0; index<childCount; index++){
 		var child:Transform = originList.transform.GetChild(index);
 		var containerTransform:Transform = child.Find("container");
-		Debug.Log("containerTransform = " + containerTransform+",containerTransform.gameObject = "+containerTransform.gameObject);
+		var datactrl:DataItem_Controller = child.GetComponent(DataItem_Controller);
+		if(datactrl){
+			Destroy(datactrl);
+		}
 		if(containerTransform){
 			var container:UISprite = containerTransform.gameObject.GetComponent(UISprite) as UISprite;
-			Debug.Log("container = "+ container);
+			
 			if(container){
 				container.spriteName = "shuzi_"+(index+1);
 			}
 		}
 	}
-	childCount = orderList.transform.childCount;
-	for(index = 0 ;index<childCount; index++){
-		child = orderList.transform.GetChild(index);
-		if(child ){
-			Destroy(child.gameObject);
-		}
-	}
-	orderList.transform.DetachChildren();
+	clearnChildren(orderList.transform);
+	
+
 	initDialogList();
 	m_putCount = 0;
 
 }
-
+function clearnChildren(parent:Transform):void{
+	var childCount:int = parent.childCount;
+	childCount = orderList.transform.childCount;
+	for(var index:int = 0 ;index<childCount; index++){
+		var child:Transform = parent.GetChild(index);
+		if(child ){
+			Destroy(child.gameObject);
+		}
+	}
+	parent.DetachChildren();
+}
 
 function onConfirm():void{
 	
 	
-	Debug.Log("estimate dialog 1 :: onConfim :: answer = "+ m_putCount);
-	if(m_putCount !=4) {
+	var originList_children:Array = getDataCtrlComponentCount(originList.transform);
+	if(originList_children.length !=4) {
 		Debug.Log("MakeChoiceToSave_Controller::onConfim::error::please make a complete answer");
 		return;
 	}
-	var items:GameObject[] = GameObject.FindGameObjectsWithTag("estimate_item_1_tag") ;
-	for(var item:GameObject in items){		
-		var dataComponent:DataItem_Controller = item.GetComponent(DataItem_Controller) as DataItem_Controller;
-		var questData:Question = getQuestionById(dataComponent.id);
-		if(item.name == "order_"+questData.answer){
+	//var items:GameObject[] = GameObject.FindGameObjectsWithTag("estimate_item_1_tag") ;
+	var child_count :int = originList_children.length;
+	for(var index:int = 1; index<=child_count ;index++){
+		var child:Transform = UIManager.getInstance().findTransformByName("order_"+index,originList.transform);
+		var dataComponent:DataItem_Controller = child.GetComponent(DataItem_Controller);
+		var questData:Question = getQuestionById(dataComponent.id,null);
+		Debug.Log(dataComponent.id+",questData.answer  = " +questData.answer +",index = "+index);
+		if(parseInt(questData.answer) == index){
+			Debug.Log("{}{{}{{{}}}}");
 			m_score+=questData.score;
 		}
 	}
+	
 	Debug.Log(m_score+"= m_score");
-	UIManager.getInstance().addScore(m_score);
-	UIManager.getInstance().showDialog(UIManager.UI_CLASSFICATE_2);
+	// UIManager.getInstance().addScore();
+	UIManager.getInstance().showDialog(UIManager.UI_CLASSFICATE_2,m_score);
 }
 
-function getQuestionById(id:String):Question{
-	for(var data:Question in m_dataList){
-		if(data.id == id){
-			return data;
+function getQuestionById(id:String,data:List.<Question>):Question{
+	if(data ==null){
+		data = m_dataList;
+	}
+	for(var itemData:Question in data){
+		if(itemData.id == id){
+			return itemData;
 		}
 	}
 	return null;

@@ -9,9 +9,10 @@ function Start () {
 
 }
 
-function Update () {
-
+function Awake():void{
+	DontDestroyOnLoad(transform.gameObject);
 }
+
 public function show(smallDialog:boolean,score:int):void{
 	smallScore.active = false;
 	smallScore.SetActiveRecursively(false);
@@ -110,8 +111,8 @@ function addStar(count:int,container:Transform):void{
 
 /***********************ok button handle*************************************/
 function onSmallScorePanelOK():void{
-	UIManager.getInstance().showDialog(UIManager.UI_MENU);	
+	UIManager.getInstance().showDialog(UIManager.UI_MENU,0);	
 }
 function returnBackHome():void{
-	UIManager.getInstance().showDialog(UIManager.UI_MENU);
+	UIManager.getInstance().showDialog(UIManager.UI_MENU,0);
 }

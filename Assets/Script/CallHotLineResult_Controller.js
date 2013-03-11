@@ -8,8 +8,8 @@ function Start () {
 
 }
 
-function Update () {
-
+function Awake():void{
+	DontDestroyOnLoad(transform.gameObject);
 }
 
 function onConfirm():void{

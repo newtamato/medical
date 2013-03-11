@@ -40,10 +40,10 @@
     </Dialog>
     <Dialog name="classification_1" allscore="12">
       <Questions>
-        <Question id="op_1" answer="1" text="红" image="red" ></Question>
-        <Question id="op_2" answer="2" text="黄" image="yellow" ></Question>
-        <Question id="op_3" answer="3" text="绿" image="blue" ></Question>
-        <Question id="op_4" answer="4" text="黑" image="black" ></Question>
+        <Question id="op_1" answer="1" text="红" image="red" score="3"></Question>
+        <Question id="op_2" answer="2" text="黄" image="yellow" score="3"></Question>
+        <Question id="op_3" answer="3" text="绿" image="blue" score="3"></Question>
+        <Question id="op_4" answer="4" text="黑" image="black" score="3"></Question>
       </Questions>
     </Dialog>
     <Dialog name="classification" allscore="36">

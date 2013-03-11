@@ -25,8 +25,11 @@ public class DragDropItem : MonoBehaviour
 	void UpdateTable ()
 	{
 		UITable table = NGUITools.FindInParents<UITable>(gameObject);
-		
+		Debug.Log("XXXXXXKKKKKKKAKKAKAKAKAKAKAKAK"+table);
 		if (table != null) table.repositionNow = true;
+
+		UIGrid grid = NGUITools.FindInParents<UIGrid>(gameObject);
+		if (grid!= null) grid.repositionNow = true;
 		
 	}
 
@@ -37,7 +40,7 @@ public class DragDropItem : MonoBehaviour
 	void Drop ()
 	{
 		// Is there a droppable container?
-		Debug.Log("DragDropItem::Drop");
+		//Debug.Log("DragDropItem::Drop");
 		if(mParent ==null || mParent.gameObject == null){
 			return ;
 		}
@@ -48,7 +51,7 @@ public class DragDropItem : MonoBehaviour
 
 		if (container != null)
 		{
-			Debug.Log("DragDropItem::Drop::container exists :: "+col.gameObject.name);
+		//	Debug.Log("DragDropItem::Drop::container exists :: "+col.gameObject.name);
 			// Container found -- parent this object to the container
 			mTrans.parent = container.transform;
 			valid = true;
@@ -62,7 +65,7 @@ public class DragDropItem : MonoBehaviour
 			if(mParent && mParent.gameObject){
 				mTrans.parent = mParent;
 				valid = false;
-				Debug.Log("[DragDropItem::Drop] mParent = "+ mParent.gameObject.name);
+				//Debug.Log("[DragDropItem::Drop] mParent = "+ mParent.gameObject.name);
 			}
 		}
 		// Notify the table of this change
@@ -102,7 +105,7 @@ public class DragDropItem : MonoBehaviour
 				}
 
 				if(DragDropRoot.root.gameObject){
-					Debug.Log("[DragDropItem::OnDrag]drag drop root name is " + DragDropRoot.root.gameObject.name);
+				//	Debug.Log("[DragDropItem::OnDrag]drag drop root name is " + DragDropRoot.root.gameObject.name);
 				}
 				mTrans.BroadcastMessage("CheckParent", SendMessageOptions.DontRequireReceiver);
 			}
@@ -110,7 +113,7 @@ public class DragDropItem : MonoBehaviour
 			{
 
 				mTrans.localPosition += (Vector3)delta ;
-				Debug.Log("[DragDropItem::OnDrag] delta = "+delta +",position = ");
+				//Debug.Log("[DragDropItem::OnDrag] delta = "+delta +",position = ");
 
 			}
 		}

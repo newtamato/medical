@@ -1,7 +1,7 @@
 #pragma strict
 
 public var test:String="";
-private var currentState:String = "";
+private var currentState:String = "UI";
 
 public static var UI:String = "UI";
 public static var SCENE:String = "scene";

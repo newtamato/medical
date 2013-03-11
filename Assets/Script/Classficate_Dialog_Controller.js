@@ -19,7 +19,7 @@ private var m_max:int = 0;
 
 private var  m_answers:Array = null;
 private var m_start:boolean = false;    
-
+private var m_score:int = 0;
 
 class AnswerDataValue{
 	public var id:String;
@@ -36,9 +36,16 @@ function Start () {
 	}
 	m_answers = new Array();
 }
+function Awake():void{
+	DontDestroyOnLoad(transform.gameObject);
+}
 
-
-
+function setScore(score:int):void{
+	m_score = score;
+	if(m_score<0){
+		m_score = 0;
+	}
+}
 function setData(data:List.<Question>):void{
 	
 	if(null == patientList){
@@ -153,7 +160,7 @@ function initListFromData(questions:List.<Question>):void{
 					p_item.SetActiveRecursively(true);
 					var back:String = getColorById(item.id);
 					if(back == null || back == ""){
-						back = "greenBack";
+						back = "unselected";
 					}
 					pItemControl.setData(item.id,item.text,item.image,item,back);
 				}else{
@@ -209,6 +216,9 @@ function onRgihtBtn ():void {
 }
 
 function onStartRotate():void{
+	if(m_currentId == null || m_currentId == ""){
+		return ;
+	}
 	var hasDoneIt:boolean = hasDoneIt(m_currentId);
 	if(hasDoneIt){
 		return;
@@ -235,12 +245,18 @@ function getColorById(id:String):String{
 	return "";
 }
 function onStopRotate():void{
+	if(m_currentId == null || m_currentId == ""){
+		return ;
+	}
 	if(rotatePointer){
 		var rotateComponent:RotatingUnityGUI = rotatePointer.GetComponent(RotatingUnityGUI) as RotatingUnityGUI;
 		if(rotateComponent){
 			rotateComponent.StopRotate();
 		}
-
+		var hasAnswered:boolean = hasDoneIt(m_currentId);
+		if(hasAnswered){
+			return;
+		}
 		var color:String = getColorFromRotate();
 		var answer:AnswerDataValue = new AnswerDataValue();
 		answer.id = m_currentId;
@@ -259,7 +275,8 @@ function onStopRotate():void{
 
 		if(questionData.answer == color){
 			var score:int = questionData.score;
-			UIManager.getInstance().addScore(score);
+			m_score+=score;
+			
 		}
 
 	}
@@ -278,9 +295,19 @@ function hasAllFinish():boolean{
 
 function Update():void{
 	return;
+	if(dataList==null){
+		return;
+	}
+	var length:int = m_answers.length;
+	var all:int = dataList.Count;
+	var infoTrans:Transform = UIManager.getInstance().findTransformByName("info",transform);
+	if(infoTrans){
+		var info:UILabel = infoTrans.GetComponent(UILabel);
+		info.text = length+"/"+all;
+	}
 	var hasFinished:boolean = hasAllFinish();
 	if(hasFinished){
-		labelTxt.text = "下一题";
+		labelTxt.text = "答题完毕";
 		btn.active = true;
 		btn.SetActiveRecursively(true);
 
@@ -326,6 +353,7 @@ function getColorFromRotate():String{
 function onConfirm():void{
 	var hasFinished:boolean = hasAllFinish();
 	if(hasFinished){
+		UIManager.getInstance().addScore(m_score);
 		UIManager.getInstance().nextDialog();
 		UIManager.getInstance().addFinishedDialog(UIManager.UI_CLASSFICATE_2);
 	}else{

@@ -23,6 +23,9 @@ function Start () {
 	initPhone();
 	initHotLinePanel();
 }
+function Awake():void{
+	DontDestroyOnLoad(transform.gameObject);
+}
 
 function initPhone():void{
 	if(showNumber){
@@ -146,7 +149,8 @@ function onPressCall():void{
 	var label:UILabel = showNumber.GetComponent("UILabel");
 	var str:String = label.text ;
 	if(str == "120"){
-		UIManager.getInstance().addScore(3);
+		//UIManager.getInstance().addScore(3);
+		m_score+=3;
 	}
 	//hotlinePanel.transform.localPosition.x = -140;
 	show(HOT_LINE_PANEL);
@@ -167,7 +171,7 @@ function onConfim():void{
 		
 		if(checkbox.isChecked){
 			var qData:Question = itemDataComponent.questionData ;
-			Debug.Log("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"+ qData.answer);
+			
 			if(qData.answer == "right"){
 				m_score += qData.score;
 				rightNumber++;
