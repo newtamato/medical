@@ -1,7 +1,7 @@
 #pragma strict
 
 private var m_current:String;
-public var layer:GameObject;
+// public var layer:GameObject;
 
 function Start () {
 
@@ -28,15 +28,13 @@ public function onSelectDun():void{
 }
 
 public function onComplete():void{
-	// if(layer){
-	// 	var barrier:setRoadBarrier = layer.GetComponent(setRoadBarrier);
-	// 	barrier.computerScore();
-	// }
 	
-	Global.getInstance().setCurrentState(Global.UI);
-	UIManager.getInstance().activeSceneAndDeactiveMap(true);
-	UIManager.getInstance().nextDialog();	
-	UIManager.getInstance().addFinishedDialog(UIManager.UI_SECURITY);	
+	
+	// Global.getInstance().setCurrentState(Global.UI);
+	// UIManager.getInstance().activeSceneAndDeactiveMap(true);
+	// // UIManager.getInstance().addScore();
+	// UIManager.getInstance().nextDialog();	
+	// UIManager.getInstance().addFinishedDialog(UIManager.UI_SECURITY);	
 	
 	
 }

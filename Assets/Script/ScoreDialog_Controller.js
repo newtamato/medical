@@ -50,17 +50,17 @@ function setScore(score:int,container:Transform):void{
 	
 	if(score>0 && score <=20){
 		starNumber =1;
-	}else if(score <=40){
+	}else if(score >20 && score <=40){
 		starNumber =2;
-	}else if(score <=60){
+	}else if(score >40 && score <=60){
 		starNumber =3;
-	}else if(score <=80){
+	}else if(score >60 && score <=80){
 		starNumber =4;
-	}else if(score <=200){
+	}else if(score >80 && score <=200){
 		starNumber =5;
 	}
 	addStar(starNumber,container);
-	award.spriteName = "award_"+ starNumber;
+	// award.spriteName = "award_"+ starNumber;
 }
 
 function findTransformByName(name:String,parent:Transform):Transform{
@@ -97,6 +97,7 @@ function addStar(count:int,container:Transform):void{
 	}
 	var index:int = 0;
 	//stars.transform.DetachChildren();
+
 	for(index =0; index<count;index++){
 		var child:Transform = starTrans.GetChild(index);
 		var img:UISprite = child.GetComponent(UISprite);
