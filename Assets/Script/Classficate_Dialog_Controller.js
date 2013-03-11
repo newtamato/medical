@@ -13,9 +13,9 @@ private var m_currentId:String;
 private var m_currentGameObject:GameObject = null;
 private var dataList:List.<Question> =null;
 
-private var m_startIndex:int = 0;
-private var m_endIndex:int = 4;
-private var m_max:int = 0;
+// private var m_startIndex:int = 0;
+// private var m_endIndex:int = 4;
+// private var m_max:int = 0;
 
 private var  m_answers:Array = null;
 private var m_start:boolean = false;    
@@ -28,8 +28,8 @@ class AnswerDataValue{
 function Start () {
 	tip.active = false;
 	tip.SetActiveRecursively(false);
-	m_startIndex = 0;
-	m_endIndex = 4;
+	// m_startIndex = 0;
+	// m_endIndex = 4;
 	if(arrow){
 		arrow.active = false;
 		arrow.SetActiveRecursively(false);
@@ -53,20 +53,32 @@ function setData(data:List.<Question>):void{
 	}
 	dataList = data;
 	//return;
-	m_startIndex = 0;
-	m_max = dataList.Count;
-	var resultList :Question[] = getData();
+	//m_startIndex = 0;
+	//m_max = dataList.Count;
+	//var resultList :Question[] = getData();
 	// initListFromData(resultList);
-	initListFromData(dataList);
+	//initListFromData(dataList);
+
+	init();
 }
 
-public function getData():Question[]{
-	var resultList:Question[]  = new Question[4];
-	var num:int = (m_startIndex+4)>m_max ? (m_max - m_startIndex) : 4; 
-	(dataList as List.<Question>).CopyTo(m_startIndex,resultList,0,num);
-	//.CopyTo(m_startIndex,resultList,0,4);
-	return resultList;
+public function init():void{
+	m_currentId = null;
+	m_currentGameObject = null;
+	m_score =0;
+	m_answers =[];
+	m_start = false;
+	DataManager.getInstance().RandomizeBuiltinArray(dataList);
+	initListFromData(dataList);	
+	clearTipArrow();
 }
+// public function getData():Question[]{
+// 	var resultList:Question[]  = new Question[4];
+// 	var num:int = (m_startIndex+4)>m_max ? (m_max - m_startIndex) : 4; 
+// 	(dataList as List.<Question>).CopyTo(m_startIndex,resultList,0,num);
+// 	//.CopyTo(m_startIndex,resultList,0,4);
+// 	return resultList;
+// }
 
 
 function onLoadDataComplete():void{
@@ -116,62 +128,44 @@ function initListFromData(questions:List.<Question>):void{
 	if(questions.Count == 0){
 		return;
 	}
-	//Debug.Log("questions.length() = "+ questions.get_Length());
-	
 	var grid:UIGrid = patientList.GetComponent("UIGrid") as UIGrid;
+	
+	UIManager.getInstance().clearnChildren(grid.transform);
 
 	var p_item:GameObject = null;
 	var gridTransform:Transform = grid.transform;
 	var pItemControl:PatientItem_Controller;
 	var item:Question = null;
 	
-	if(gridTransform.childCount ==4){
-		for (var i:int = 0; i < gridTransform.childCount; ++i)
-		{
-			item = questions[i];
-			var childTransform:Transform = gridTransform.GetChild(i);
-			p_item = childTransform.gameObject;
+	
+	var index:int = 0;
+	for(item in questions){
+		p_item = Instantiate(itemPrefab);
+		if(p_item){
+
+			p_item.transform.parent = grid.transform;		
+			p_item.name = "patient_"+index;
 			pItemControl = p_item.GetComponent(PatientItem_Controller) as PatientItem_Controller;
-			if(null == pItemControl){
-				pItemControl = p_item.AddComponent(PatientItem_Controller);
-				
-			}
+							
+
 			pItemControl.setMouseOverFunction(onMouseOverToPatientItem);
+			p_item.transform.localScale = new Vector3(1,1,1);
+			p_item.transform.localPosition = new Vector3(0,0,0);		
 			
-			
-		}
-	}else{
-		var index:int = 0;
-		for(item in questions){
-			p_item = Instantiate(itemPrefab);
-			if(p_item){
-
-				p_item.transform.parent = grid.transform;		
-				p_item.name = "patient_"+index;
-				pItemControl = p_item.GetComponent(PatientItem_Controller) as PatientItem_Controller;
-								
-
-				pItemControl.setMouseOverFunction(onMouseOverToPatientItem);
-				p_item.transform.localScale = new Vector3(1,1,1);
-				p_item.transform.localPosition = new Vector3(0,0,0);		
-				
-				if(item){
-					p_item.active = true;
-					p_item.SetActiveRecursively(true);
-					var back:String = getColorById(item.id);
-					if(back == null || back == ""){
-						back = "unselected";
-					}
-					pItemControl.setData(item.id,item.text,item.image,item,back);
-				}else{
-			
+			if(item){
+				p_item.active = true;
+				p_item.SetActiveRecursively(true);
+				var back:String = getColorById(item.id);
+				if(back == null || back == ""){
+					back = "unselected";
 				}
+				pItemControl.setData(item.id,item.text,item.image,item,back);
 			}
-			index++;
-
 		}
-		grid.Reposition();
+		index++;
 	}
+	grid.Reposition();
+	
 }
 function show():void{
 	clearTipArrow();	
@@ -182,38 +176,38 @@ function clearTipArrow(){
 	arrow.SetActiveRecursively(false);
 	tip.SetActiveRecursively(false);
 }
-function onLeftBtn():void{
-	clearTipArrow();
-	// patientList.transform.localPosition.x -= 200;
-	Debug.Log("m_startIndex = "+m_startIndex);
+// function onLeftBtn():void{
+// 	clearTipArrow();
+// 	// patientList.transform.localPosition.x -= 200;
+// 	Debug.Log("m_startIndex = "+m_startIndex);
 
-	if(m_startIndex == 0){
-		return;
-	}
-	m_startIndex-=4;
-	if(m_startIndex <0){
-		m_startIndex = 0;
-	}
-	var resultList:Question[] = getData();
-	//initListFromData(resultList);
-}
-function onRgihtBtn ():void {
-	// body...
-	// patientList.transform.localPosition.x += 200;
-	clearTipArrow();
-	if(m_startIndex == m_max){
-		return;
-	}
+// 	if(m_startIndex == 0){
+// 		return;
+// 	}
+// 	m_startIndex-=4;
+// 	if(m_startIndex <0){
+// 		m_startIndex = 0;
+// 	}
+// 	var resultList:Question[] = getData();
+// 	// initListFromData(resultList);
+// }
+// function onRgihtBtn ():void {
+// 	// body...
+// 	// patientList.transform.localPosition.x += 200;
+// 	clearTipArrow();
+// 	if(m_startIndex == m_max){
+// 		return;
+// 	}
 
-	m_startIndex+=4;
-	if(m_startIndex>m_max){
-		m_startIndex = m_max;
-	}
+// 	m_startIndex+=4;
+// 	if(m_startIndex>m_max){
+// 		m_startIndex = m_max;
+// 	}
 	
 	
-	var resultList:Question[] = getData();
-	//initListFromData(resultList);
-}
+// 	var resultList:Question[] = getData();
+// 	//initListFromData(resultList);
+// }
 
 function onStartRotate():void{
 	if(m_currentId == null || m_currentId == ""){
@@ -294,7 +288,7 @@ function hasAllFinish():boolean{
 }
 
 function Update():void{
-	return;
+	// return;
 	if(dataList==null){
 		return;
 	}

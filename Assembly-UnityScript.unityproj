@@ -62,6 +62,7 @@
      <Compile Include="Assets\Script\MakeOrderDialog_Controller.js" />
      <Compile Include="Assets\Script\MakeOrder_Controller.js" />
      <Compile Include="Assets\Script\MenuDialog_Controller.js" />
+     <Compile Include="Assets\Script\NewSecurityCheck_Controller.js" />
      <Compile Include="Assets\Script\PatientItem_Controller.js" />
      <Compile Include="Assets\Script\PutSecurity_Controller.js" />
      <Compile Include="Assets\Script\Return_Controller.js" />

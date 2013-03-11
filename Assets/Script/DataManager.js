@@ -241,9 +241,10 @@ function LoadXML()
    // _data=_info;
    
 }
-static function RandomizeBuiltinArray(arr : Object[])
+static function RandomizeBuiltinArray(arr : List.<Question>)
 {
-    for (var i = arr.Length - 1; i > 0; i--) {
+   var count:int = arr.Count;
+    for (var i = count - 1; i > 0; i--) {
         var r = UnityEngine.Random.Range(0,i);
         var tmp = arr[i];
         arr[i] = arr[r];

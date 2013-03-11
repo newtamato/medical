@@ -5,7 +5,7 @@ public var orderList:GameObject;
 public var itemPrefab:GameObject;
 private var m_dataList:List.<Question>;
 private var m_score:int = 0;
-private var m_putCount:int = 0;
+// private var m_putCount:int = 0;
 
 
 
@@ -33,15 +33,22 @@ function onLoadDataComplete():void{
 
 function setData(data:List.<Question>):void{
 	m_dataList = data;
-	initDialogList();
+
+	init();
 }
 
-function initDialogList():void{
+function init():void{
+	m_score = 0;
+	
+	DataManager.getInstance().RandomizeBuiltinArray(m_dataList);
+
 	var index:int = 0;
 	var count:int = m_dataList.Count;
 	
 	var childCount:int = orderList.transform.childCount;
-	var isNew:boolean = false;
+	
+
+	UIManager.getInstance().clearnChildren(orderList.transform);
 
 	for(index =0; index<count; index++){
 		
@@ -52,6 +59,29 @@ function initDialogList():void{
 	}
 	var orderList:UITable = orderList.GetComponent("UITable") as UITable;
 	orderList.Reposition();
+
+
+
+	childCount = originList.transform.childCount;
+	Debug.Log("childCount = "+ childCount);
+	for(index = 0; index<childCount; index++){
+		var child:Transform = originList.transform.GetChild(index);
+		var containerTransform:Transform = child.Find("container");
+		var datactrl:DataItem_Controller = child.GetComponent(DataItem_Controller);
+		if(datactrl){
+			Destroy(datactrl);
+		}
+		if(containerTransform){
+			var container:UISprite = containerTransform.gameObject.GetComponent(UISprite) as UISprite;
+			
+			if(container){
+				container.spriteName = "shuzi_"+(index+1);
+			}
+		}
+	}
+	//clearnChildren(orderList.transform);
+
+
 }
 
 function createItemForQuestionList(itemData:Question):void{
@@ -147,28 +177,11 @@ function onDropToChangeDisplay(){
 
 function onCancle():void{
 	Debug.Log("MakeChoiceToSave_Controller::onCancle");
-	var childCount:int = originList.transform.childCount;
-	Debug.Log("childCount = "+ childCount);
-	for(var index:int = 0; index<childCount; index++){
-		var child:Transform = originList.transform.GetChild(index);
-		var containerTransform:Transform = child.Find("container");
-		var datactrl:DataItem_Controller = child.GetComponent(DataItem_Controller);
-		if(datactrl){
-			Destroy(datactrl);
-		}
-		if(containerTransform){
-			var container:UISprite = containerTransform.gameObject.GetComponent(UISprite) as UISprite;
-			
-			if(container){
-				container.spriteName = "shuzi_"+(index+1);
-			}
-		}
-	}
-	clearnChildren(orderList.transform);
+	
 	
 
-	initDialogList();
-	m_putCount = 0;
+	init();
+	//m_putCount = 0;
 
 }
 function clearnChildren(parent:Transform):void{

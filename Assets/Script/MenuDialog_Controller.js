@@ -32,9 +32,6 @@ private var m_selectedGO:Hashtable;
 function Start () {
 	//init data
 	m_Selection = new Array();
-	
-	
-		
 
 	m_selectedGO = {
 					UIManager.UI_HOT_LINE : option_1_img,
@@ -51,7 +48,7 @@ function Awake():void{
 }
 
 function show():void{
-	Debug.Log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+	
 	setOptionImgBack();
 	m_show = true;
 	var count:int = 4;
@@ -80,6 +77,7 @@ function show():void{
 
 	}
 }
+
 
 
 

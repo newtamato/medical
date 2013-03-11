@@ -10,23 +10,29 @@ public var phonePanel:GameObject;
 
 private var mQuestions:List.<Question>;
 
-private var mCurrentIndex:int = 0;
+//private var mCurrentIndex:int = 0;
 
-private var mFirstPhaseQuestionNumber:int = 5;
+// private var mFirstPhaseQuestionNumber:int = 5;
 private var m_score:int = 0;
 public static var PHONE_PANEL:String = "phone";
 public static var HOT_LINE_PANEL:String = "hotline";
 
 
 function Start () {
-	
+	m_score = 0;
 	initPhone();
 	initHotLinePanel();
+	
 }
 function Awake():void{
 	DontDestroyOnLoad(transform.gameObject);
 }
-
+public function init():void{
+	m_score = 0;
+	initPhone();
+	initHotLinePanel();
+	setData();
+}
 function initPhone():void{
 	if(showNumber){
 		var label:UILabel = showNumber.GetComponent("UILabel");
@@ -65,34 +71,45 @@ function onLoadDataComplete () {
 	var dialogData:Dialog = DataManager.getInstance().getDialog("callHotLine");
 	var questions:List.<Question> = dialogData.Questions;
 	mQuestions = questions;	
-	setData(mQuestions);
+	
+	setData();
 //	onUpPage();
 }
 
-function setData(questionDataList:List.<Question>):void{
+function setData():void{
+	
+	DataManager.getInstance().RandomizeBuiltinArray(mQuestions);
+
 	var grid:UIGrid = questionList.GetComponent("UIGrid") as UIGrid;
 
-	var gridTransform:Transform = grid.transform;
-	for(var i:int = 0;i<gridTransform.childCount;i++){
-		var child:Transform = gridTransform.GetChild(i);
-		Destroy(child.gameObject);
+	// UIManager.getInstance().clearnChildren(questionList.transform);
+	var childCount :int = questionList.transform.childCount;
+	if(childCount >= mQuestions.Count){
+		for(var i:int = 0;i< childCount;i++){
+			var childTrans:Transform = questionList.transform.GetChild(i);
+			if(childTrans){
+				var cbx:UICheckbox = childTrans.GetComponent(UICheckbox);
+				cbx.isChecked = false;
+			}
+		}
+	}else{
+		var index:int = mQuestions.Count;
+		for(var itemData:Question in mQuestions){
+			var item:GameObject = Instantiate(itemPrefab);
+			item.transform.parent = questionList.transform;
+			item.name = "question_"+index--;
+			item.transform.localScale = new Vector3(1,1,1);
+			item.transform.localPosition = new Vector3(0,0,0);
+			item.AddComponent(UIDragPanelContents);
+			var label:UILabel =item.GetComponent(UILabel);
+			var itemDataComponent:HotLineQuestionItem_Controller = item.GetComponent(HotLineQuestionItem_Controller) as HotLineQuestionItem_Controller;
+			itemDataComponent.questionData = itemData;
+			itemDataComponent.label.text = itemData.text;
+		}
+		grid.Reposition();
+		
+		UIManager.getInstance().ChangeLayersRecursively(gameObject.transform,"uilayer");
 	}
-	var index:int = questionDataList.Count;
-	for(var itemData:Question in questionDataList){
-		var item:GameObject = Instantiate(itemPrefab);
-		item.transform.parent = questionList.transform;
-		item.name = "question_"+index--;
-		item.transform.localScale = new Vector3(1,1,1);
-		item.transform.localPosition = new Vector3(0,0,0);
-		item.AddComponent(UIDragPanelContents);
-		var label:UILabel =item.GetComponent(UILabel);
-		var itemDataComponent:HotLineQuestionItem_Controller = item.GetComponent(HotLineQuestionItem_Controller) as HotLineQuestionItem_Controller;
-		itemDataComponent.questionData = itemData;
-		itemDataComponent.label.text = itemData.text;
-	}
-	grid.Reposition();
-	
-	UIManager.getInstance().ChangeLayersRecursively(gameObject.transform,"uilayer");
 }
 
 function pressKey_0():void{

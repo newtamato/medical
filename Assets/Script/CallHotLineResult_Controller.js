@@ -17,7 +17,9 @@ function onConfirm():void{
 
 	UIManager.getInstance().addFinishedDialog(UIManager.UI_HOT_LINE);
 }
+public function init():void{
 
+}
 function showMassage(str:String):void{
 	var uiTrans:Transform = UIManager.getInstance().findTransformByName("result",transform);
 	var uiSprite:UISprite = uiTrans.GetComponent(UISprite);

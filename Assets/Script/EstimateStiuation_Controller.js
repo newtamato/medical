@@ -26,15 +26,6 @@ function onOkBtn():void{
 	
 }
 
-function onDoRight():void{
-
-}
-
-function onDoWrong():void{
-
-}
-
-
 function onLoadDataComplete():void{
 	var dialogData:Dialog = DataManager.getInstance().getDialog("estimateLive");
 	var questions:List.<Question> = dialogData.Questions;
@@ -49,12 +40,11 @@ function init():void{
 	if(null == dataList){
 		return;
 	}
+	DataManager.getInstance().RandomizeBuiltinArray(dataList);
+	m_score = 0;
 	
 	var grid:UIGrid = estimateList.GetComponent("UIGrid") as UIGrid;
-	// var childCount:int = grid.transform.childCount;
-	// if(childCount == dataList.Count){
-	// 	return;
-	// }
+	
 	UIManager.getInstance().clearnChildren(grid.transform);
 
 	var img:UISprite =null;
@@ -87,7 +77,7 @@ function init():void{
 	}
 	UIManager.getInstance().ChangeLayersRecursively(grid.transform,"uilayer");
 	grid.Reposition();
-	//estimateList.transform.localPosition.z = -1;
+	
 
 	//init valid list
 
@@ -111,9 +101,9 @@ function setData(data:List.<Question>):void{
 	//return;
 	
 	init();
-	
-	
 }
+
+
 
 function DropItemComplete(valid:boolean):void{
 	if(valid == false){

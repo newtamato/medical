@@ -83,23 +83,41 @@ function nextDialog():void{
 		}
 		return;
 	}
-	Debug.Log("UIManager::nextDialog dialogName is "+ mDialogIndex);
-	var dialogName:String = mDialogQueue[mDialogIndex];
 	
+	var dialogName:String = mDialogQueue[mDialogIndex];
+	Debug.Log("UIManager::nextDialog dialogName is "+ dialogName);
 	showDialog(dialogName,0);
 	mDialogIndex++;
+}
+
+function returnBack():void{
+	clearAll();	
+	showDialog(UI_MENU,0);
 }
 function clearAll(){
 	mDialogQueue = [];
 	mDialogIndex = 0;
 	activeSceneAndDeactiveMap(true);
-	clearMap();
+	initAllDialog();
 }
-public function clearMap():void{
-	var mapTrans:Transform =findTransformByName("mapTileContainer",map.transform);
-	var tileManager:TileManager =mapTrans.transform.GetComponent(TileManager);
-	tileManager.clearMap();
+
+function initAllDialog():void{
+	var phone:CallHotLine_Controller = dialog_hotline.GetComponent(CallHotLine_Controller);
+	phone.init();
+	var estimate_ctrl:EstimateStiuation_Controller = dialog_estiamte.GetComponent(EstimateStiuation_Controller);
+	estimate_ctrl.init();
+	var classficate_ctrl1:MakeChoiceToSave_Controller = dialog_classfication_1.GetComponent(MakeChoiceToSave_Controller);
+	classficate_ctrl1.init();
+	var classficate_ctrl2:Classficate_Dialog_Controller = dialog_classfication_2.GetComponent(Classficate_Dialog_Controller);
+	classficate_ctrl2.init();
+	var phoneResult:CallHotLineResult_Controller = dialog_callHotLineResult.GetComponent(CallHotLineResult_Controller);
+	phoneResult.init();
+
+	var tileMap:NewSecurityCheck_Controller =map.transform.GetComponent(NewSecurityCheck_Controller);
+	tileMap.init();
 }
+
+
 function addFinishedDialog(name:String):void{
 	
 	if(isFinished(name)){
@@ -178,7 +196,12 @@ function activeSceneAndDeactiveMap(activeScene:boolean):void{
 	map.SetActiveRecursively(!activeScene);
 
 	if(activeScene == false){
-		Camera.main.fieldOfView = 48;
+		// Camera.main.fieldOfView = 48;
+		Camera.main.orthographic = true;
+		Camera.main.orthographicSize = 60;
+	}else{
+		Camera.main.orthographic = false;
+		Camera.main.fieldOfView = 60;
 	}
 }
 
@@ -231,12 +254,14 @@ public function showDialog(dialigName:String,score:int):void{
 	if(dialigName == UI_SECURITY){
 		
 		dialog_tool.transform.localPosition.x = 400;
-		dialog_tool.transform.localPosition.y = -261.0464;
+		dialog_tool.transform.localPosition.y = -450;
 
 		// var controller:Tool_Controller = dialog_tool.GetComponent(Tool_Controller);
 		// controller.changeTheMainCamera();
 
 		activeSceneAndDeactiveMap(false);
+
+
 		// scene.active = false;
 		// scene.SetActiveRecursively(false);
 
