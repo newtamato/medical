@@ -177,10 +177,10 @@ function Update () {
 
 				var pos:Vector2 = getPosition(name);
 				var dir:String = getDirection(pos);
-				score = getScoreByPositionAndDirection(pos,dir);
-				m_score+=score;
+				getScoreByPositionAndDirection(pos,dir);
+				// m_score+=score;
 			}
-			Debug.Log(name +", score = "+score);
+			
 		}
 	}
 }
@@ -291,7 +291,18 @@ public function getScoreByPositionAndDirection(position:Vector2,direct:String):i
 }
 
 function onConfirm():void{
-	UIManager.getInstance().addScore(m_score);
+	var count:int  = 0;
+	if(top_score_map!=null){
+		count +=top_score_map.Count;
+	}
+	if(left_score_map!=null){
+		count+=left_score_map.Count;
+	}
+	if(right_score_map!=null){
+		count+=right_score_map.Count;
+	}
+	Debug.Log("onConfirm........................................count = "+ count);
+	UIManager.getInstance().addScore(count*2);
 	UIManager.getInstance().nextDialog();
 }
 

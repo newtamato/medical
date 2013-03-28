@@ -113,7 +113,8 @@ function initAllDialog():void{
 	var phoneResult:CallHotLineResult_Controller = dialog_callHotLineResult.GetComponent(CallHotLineResult_Controller);
 	phoneResult.init();
 
-	var tileMap:NewSecurityCheck_Controller =map.transform.GetComponent(NewSecurityCheck_Controller);
+	var tiles_tran:Transform = findTransformByName("tiles",map.transform);
+	var tileMap:NewSecurityCheck_Controller =tiles_tran.GetComponent(NewSecurityCheck_Controller);
 	tileMap.init();
 }
 
