@@ -1,4 +1,6 @@
-#pragma strict
+class Classficate_Dialog_Controller extends BaseDialog{
+
+
 
 
 public var patientList:GameObject;
@@ -19,8 +21,8 @@ private var dataList:List.<Question> =null;
 
 private var  m_answers:Array = null;
 private var m_start:boolean = false;    
-private var m_score:int = 0;
 
+private var m_show:boolean = false;
 class AnswerDataValue{
 	public var id:String;
 	public var color:String;
@@ -71,6 +73,7 @@ public function init():void{
 	DataManager.getInstance().RandomizeBuiltinArray(dataList);
 	initListFromData(dataList);	
 	clearTipArrow();
+	
 }
 // public function getData():Question[]{
 // 	var resultList:Question[]  = new Question[4];
@@ -168,6 +171,7 @@ function initListFromData(questions:List.<Question>):void{
 	
 }
 function show():void{
+	m_show = true;
 	clearTipArrow();	
 }
 function clearTipArrow(){
@@ -287,9 +291,16 @@ function hasAllFinish():boolean{
 	
 }
 
+override public function close():void{
+	m_show = false;
+}
+
 function Update():void{
-	// return;
+	
 	if(dataList==null){
+		return;
+	}
+	if(m_show == false){
 		return;
 	}
 	var length:int = m_answers.length;
@@ -362,4 +373,5 @@ function onConfirm():void{
 	
 	
 
+}
 }

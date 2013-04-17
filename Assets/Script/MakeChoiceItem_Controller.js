@@ -9,6 +9,8 @@ function Update () {
 
 }
 function onDropToChangeDisplay(){
-
-	container.transform.position.z = 0;
+	if(container){
+		container.transform.position.z = 0;
+	}
+	
 }

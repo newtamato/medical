@@ -1,13 +1,6 @@
 class MenuDialog_Controller extends BaseDialog{
 
 
-public var btn:GameObject;
-public var option_1:GameObject;
-public var option_2:GameObject;
-public var option_3:GameObject;
-public var option_4:GameObject;
-public var boxAnimation:UISpriteAnimation;
-
 public var option_1_img:UISprite;
 public var option_2_img:UISprite;
 public var option_3_img:UISprite;
@@ -27,20 +20,14 @@ private var m_dialogs:Array ;
 
 private var m_finishedGO:Hashtable;
 
-private var m_selectedGO:Hashtable;
 
 function Start () {
 	//init data
 	m_Selection = new Array();
 
-	m_selectedGO = {
-					UIManager.UI_HOT_LINE : option_1_img,
-					UIManager.UI_ESTIMATE : option_2_img,
-					UIManager.UI_CLASSFICATE_2 : option_4_img,
-					UIManager.UI_SECURITY : option_3_img			
-	};
+	
 
-	setVisible(false);
+	// setVisible(false);
 }
 
 function Awake():void{
@@ -120,6 +107,7 @@ function hasSelectIt(name:String):boolean{
 
 
 function onLoadDataComplete():void{
+	return;
 	Debug.Log("I got the load data complete event!");
 	var dialogData:Dialog = DataManager.getInstance().getDialog("selectRightOrder");
 	var questions:List.<Question> = dialogData.Questions;
@@ -134,7 +122,9 @@ function setData(questions:List.<Question>):void{
 	}
 	show();
 }
-
+override function close():void{
+	super.close();
+}
 
 function onConfim():void{
 	
@@ -195,41 +185,19 @@ function PlayAnimationComplete():void{
 }
 
 //设置物品的可见性
-function setVisible(visible:boolean):void{
-	if(visible == false){
-		setOptionInvisible();
-	}else{
-		setOptionVisible();
-	}
-}
+// function setVisible(visible:boolean):void{
+// 	if(visible == false){
+// 		setOptionInvisible();
+// 	}else{
+// 		setOptionVisible();
+// 	}
+// }
 class DialogOrderDataValue{
 	public var name:String;
 	public var order:int = 0;
 }
 
 
-
-//--20130302__@bwgang
-
-//针对4件物品的相同动作进行封装
-
-//设置4件物品不可见
-function setOptionInvisible(){
-	return;
-		setObjPositionX(option_1,10000);
-		setObjPositionX(option_2,10000);
-		setObjPositionX(option_3,10000);
-		setObjPositionX(option_4,10000);
-}
-
-//设置4件物品可见
-function setOptionVisible(){
-		return;
-		setObjPositionXY(option_1,-60,48);
-		setObjPositionXY(option_2,57,53);
-		setObjPositionXY(option_3,-35,-46);
-		setObjPositionXY(option_4,64,-54);
-}
 
 //还原4件物品
 function setOptionImgBack(){

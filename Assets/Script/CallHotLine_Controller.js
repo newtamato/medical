@@ -1,5 +1,4 @@
-#pragma strict
-
+class CallHotLine_Controller extends BaseDialog{
 public var showNumber:GameObject;
 public var questionList:GameObject;
 public var itemPrefab:GameObject;
@@ -9,15 +8,15 @@ public var phonePanel:GameObject;
 
 
 private var mQuestions:List.<Question>;
-
+private var mAllQuestions:List.<Question>;
 //private var mCurrentIndex:int = 0;
 
 // private var mFirstPhaseQuestionNumber:int = 5;
-private var m_score:int = 0;
+
 public static var PHONE_PANEL:String = "phone";
 public static var HOT_LINE_PANEL:String = "hotline";
-
-
+private var m_firstPage:Boolean = true;
+private var mRightNumber:int = 0;
 function Start () {
 	m_score = 0;
 	initPhone();
@@ -29,9 +28,33 @@ function Awake():void{
 }
 public function init():void{
 	m_score = 0;
+	m_firstPage = true;
+	mRightNumber = 0;
 	initPhone();
 	initHotLinePanel();
 	setData();
+
+	
+	Debug.Log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+}
+
+function makeButtonAppearance(nextBtnVisible:Boolean ):void
+{
+	Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	var nextBtn:Transform = UIManager.getInstance().findTransformByName("nextBtn",hotlinePanel.transform);
+	if(nextBtn){
+		nextBtn.gameObject.SetActiveRecursively(nextBtnVisible);
+		nextBtn.gameObject.active = nextBtnVisible;	
+	}
+	
+
+	var okConfirm:Transform = UIManager.getInstance().findTransformByName("okBtn",hotlinePanel.transform);
+	if(okConfirm){
+		nextBtnVisible = !nextBtnVisible;
+		Debug.Log("!nextBtnVisible = " +nextBtnVisible);
+		okConfirm.gameObject.SetActiveRecursively(nextBtnVisible);
+		okConfirm.gameObject.active = nextBtnVisible;		
+	}
 }
 function initPhone():void{
 	if(showNumber){
@@ -63,6 +86,7 @@ function show(name:String):void{
 	}else{
 		hotlinePanel.active = true;
 		hotlinePanel.SetActiveRecursively(true);
+		makeButtonAppearance(true);
 	}
 }
 
@@ -70,46 +94,52 @@ function onLoadDataComplete () {
 	Debug.Log("callHotLine::onLoadDataComplete");
 	var dialogData:Dialog = DataManager.getInstance().getDialog("callHotLine");
 	var questions:List.<Question> = dialogData.Questions;
-	mQuestions = questions;	
-	
+	mAllQuestions = questions;	
+	if(m_firstPage == true){
+		mQuestions = questions.GetRange(0,4);
+	}
 	setData();
 //	onUpPage();
 }
+override public function close():void{
 
-function setData():void{
+}
+override public function setData():void{
 	
 	DataManager.getInstance().RandomizeBuiltinArray(mQuestions);
 
 	var grid:UIGrid = questionList.GetComponent("UIGrid") as UIGrid;
 
-	// UIManager.getInstance().clearnChildren(questionList.transform);
-	var childCount :int = questionList.transform.childCount;
-	if(childCount >= mQuestions.Count){
-		for(var i:int = 0;i< childCount;i++){
-			var childTrans:Transform = questionList.transform.GetChild(i);
-			if(childTrans){
-				var cbx:UICheckbox = childTrans.GetComponent(UICheckbox);
-				cbx.isChecked = false;
-			}
-		}
-	}else{
-		var index:int = mQuestions.Count;
-		for(var itemData:Question in mQuestions){
-			var item:GameObject = Instantiate(itemPrefab);
-			item.transform.parent = questionList.transform;
-			item.name = "question_"+index--;
-			item.transform.localScale = new Vector3(1,1,1);
-			item.transform.localPosition = new Vector3(0,0,0);
-			item.AddComponent(UIDragPanelContents);
-			var label:UILabel =item.GetComponent(UILabel);
-			var itemDataComponent:HotLineQuestionItem_Controller = item.GetComponent(HotLineQuestionItem_Controller) as HotLineQuestionItem_Controller;
-			itemDataComponent.questionData = itemData;
-			itemDataComponent.label.text = itemData.text;
-		}
-		grid.Reposition();
+	UIManager.getInstance().clearnChildren(questionList.transform);
+	// var childCount :int = questionList.transform.childCount;
+	// if(childCount >= mQuestions.Count){
+	// 	for(var i:int = 0;i< childCount;i++){
+	// 		var childTrans:Transform = questionList.transform.GetChild(i);
+	// 		if(childTrans){
+	// 			var cbx:UICheckbox = childTrans.GetComponent(UICheckbox);
+	// 			cbx.isChecked = false;
+	// 		}
+	// 	}
+	// }else{
 		
-		UIManager.getInstance().ChangeLayersRecursively(gameObject.transform,"uilayer");
+	// }
+
+	var index:int = mQuestions.Count;
+	for(var itemData:Question in mQuestions){
+		var item:GameObject = Instantiate(itemPrefab);
+		item.transform.parent = questionList.transform;
+		item.name = "question_"+index--;
+		item.transform.localScale = new Vector3(1,1,1);
+		item.transform.localPosition = new Vector3(0,0,0);
+		item.AddComponent(UIDragPanelContents);
+		var label:UILabel =item.GetComponent(UILabel);
+		var itemDataComponent:HotLineQuestionItem_Controller = item.GetComponent(HotLineQuestionItem_Controller) as HotLineQuestionItem_Controller;
+		itemDataComponent.questionData = itemData;
+		itemDataComponent.label.text = itemData.text;
 	}
+	grid.Reposition();
+	
+	UIManager.getInstance().ChangeLayersRecursively(gameObject.transform,"uilayer");
 }
 
 function pressKey_0():void{
@@ -179,8 +209,9 @@ function onPressQuit():void{
 	// callBackComponent.execute();
 }
 
-function onConfim():void{
-	var rightNumber:int = 0;
+function onConfim():void {
+	// caculate all the score
+	
 	for(var i:int = 0;i<questionList.transform.childCount;i++){
 		var child:Transform = questionList.transform.GetChild(i);		
 		var checkbox:UICheckbox = child.gameObject.GetComponent(UICheckbox) as UICheckbox;  
@@ -191,20 +222,30 @@ function onConfim():void{
 			
 			if(qData.answer == "right"){
 				m_score += qData.score;
-				rightNumber++;
+				mRightNumber++;
 			}	
 		}
 	}
-	UIManager.getInstance().addScore(m_score);
-	// Debug.Log("m_score = "+ m_score);
-	if(rightNumber == 0){
-		Debug.Log("rightNumber = "+ rightNumber);
-		UIManager.getInstance().showCallHotLineResult(CallHotLineResult_Controller.RESULT_ANSWER_2);
-	}else if(rightNumber == 4){
-		UIManager.getInstance().showCallHotLineResult(CallHotLineResult_Controller.RESULT_ANSWER_0);
-	}else{
-		UIManager.getInstance().showCallHotLineResult(CallHotLineResult_Controller.RESULT_ANSWER_1);
-	}
 
+	if(m_firstPage == true){
+		makeButtonAppearance(false);
+		m_firstPage = false;
+		var num:int = mAllQuestions.Count;
+		mQuestions = mAllQuestions.GetRange(5,num-5);
+		setData();
+	}else{
+		// finish this dialgo and all score 	
+		UIManager.getInstance().addScore(m_score);
+		
+		if(mRightNumber == 0){
+			Debug.Log("rightNumber = "+ mRightNumber);
+			UIManager.getInstance().showCallHotLineResult(CallHotLineResult_Controller.RESULT_ANSWER_2);
+		}else if(mRightNumber == 4){
+			UIManager.getInstance().showCallHotLineResult(CallHotLineResult_Controller.RESULT_ANSWER_0);
+		}else{
+			UIManager.getInstance().showCallHotLineResult(CallHotLineResult_Controller.RESULT_ANSWER_1);
+		}
+	}
 	//UIManager.getInstance().nextDialog();
+}
 }

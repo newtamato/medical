@@ -29,7 +29,7 @@ public var scene:GameObject;
 public var map:GameObject;
 public var avators:GameObject[];
 
-
+private var m_currentDialog:GameObject;
 private var mDialogQueue:Array;
 private var mDialogIndex:int = 0;
 private var m_score:int = 0;
@@ -217,13 +217,22 @@ function showCallHotLineResult(str:String):void{
 
 public function showDialog(dialigName:String,score:int):void{
 	clearAllDialog();
+	if(m_currentDialog != null){
+		var baseCtrl:BaseDialog = m_currentDialog.GetComponent(BaseDialog);
+		if(null !=baseCtrl){
+			baseCtrl.close();
+		}
+		
+	}
 	if(dialigName == UI_MENU){
 		dialog_menu.transform.localPosition.x = 0;
 		dialog_menu.transform.localPosition.y = 0;	
-		var menu:MenuDialog_Controller = dialog_menu.GetComponent(MenuDialog_Controller);
+		m_currentDialog = dialog_menu;
+		var menu:MainMenuDialog_Controller = dialog_menu.GetComponent(MainMenuDialog_Controller);
 		menu.show();
 	}
 	if(dialigName == UI_HOT_LINE){
+		m_currentDialog = dialog_hotline;
 		dialog_hotline.transform.localPosition.x = 0;
 		dialog_hotline.transform.localPosition.y = 0;	
 		var ctrl:CallHotLine_Controller = dialog_hotline.GetComponent(CallHotLine_Controller);
@@ -231,16 +240,19 @@ public function showDialog(dialigName:String,score:int):void{
 	}
 	
 	if(dialigName == UI_ESTIMATE){
+		m_currentDialog = dialog_estiamte;
 		dialog_estiamte.transform.localPosition.x = 0;
 		dialog_estiamte.transform.localPosition.y = 30;	
 	}
 	
 	if(dialigName == UI_CLASSFICATE_1){
+		m_currentDialog = dialog_classfication_1;
 		dialog_classfication_1.transform.localPosition.x = 0;
 		dialog_classfication_1.transform.localPosition.y = 30;	
 	}
 
 	if(dialigName == UI_CLASSFICATE_2){
+		m_currentDialog = dialog_classfication_2;
 		dialog_classfication_2.transform.localPosition.x = 70;
 		dialog_classfication_2.transform.localPosition.y = 10;
 
@@ -249,11 +261,12 @@ public function showDialog(dialigName:String,score:int):void{
 		class_ctrl.show();	
 	}
 	if(dialigName == UI_SCORE){
+		m_currentDialog = dialog_score;
 		dialog_score.transform.localPosition.x = 234;
 		dialog_score.transform.localPosition.y = 72;	
 	}
 	if(dialigName == UI_SECURITY){
-		
+		m_currentDialog = dialog_tool;
 		dialog_tool.transform.localPosition.x = 400;
 		dialog_tool.transform.localPosition.y = -450;
 

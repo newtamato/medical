@@ -113,11 +113,11 @@ function init():void{
 		}
 		//mBarrierArray[col] = temp;
 	}
-	transform.localPosition = new Vector3(-2.213369,2.023206,-10.69966);
+	transform.localPosition = new Vector3(-33.72162,2.023206,-38.00631);
 	transform.localEulerAngles = new Vector3(0,1.480264,0);
-
+	transform.localScale = new Vector3(2,1,2);
 	if(mapContainer){
-		mapContainer.transform.localPosition = new Vector3(-28.85179,-30,100);
+		mapContainer.transform.localPosition = new Vector3(-28.85179,-30,180);
 		mapContainer.transform.localEulerAngles = new Vector3(270,0,0);
 	}
 	// var table:UITable = transform.GetComponent(UITable);
@@ -143,9 +143,12 @@ function createItem(color:String,col:int,row:int,name:String):void{
 	}
 	tile.name = name;
 	tile.transform.parent = transform;
-	tile.transform.position = new Vector3(col,0,row);
-	tile.transform.localScale = new Vector3(1,1,1);
+	var size:int = 1;
+	tile.transform.position = new Vector3(col*size,0,row*size);
+	tile.transform.localScale = new Vector3(size,size,size);
 	tile.transform.localEulerAngles = new Vector3(0,0,0);
+	Debug.Log("OOOOOOOOO " + tile.renderer.material.color.a);
+	tile.renderer.material.color.a = 0.1;
 }
 
 function Update () {
@@ -185,10 +188,15 @@ function Update () {
 	}
 }
 public function addDun (mousePos:Vector3) {
+
 	var dun:GameObject = Instantiate(dun);
 	dun.transform.parent = transform;
+	
+
+	dun.transform.localScale = new Vector3(20,20,20);
 	dun.transform.position = mousePos;
-	dun.transform.localScale = new Vector3(10,10,10);
+	dun.transform.localPosition.y = 22;
+	Debug.Log(mousePos,this);
 	m_dun.push(dun);
 }
 public function getTileByGlobalPosition():String{

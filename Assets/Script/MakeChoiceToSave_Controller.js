@@ -1,10 +1,12 @@
-#pragma strict
-public var originList:GameObject;
+class MakeChoiceToSave_Controller extends BaseDialog{ 
 
+public var originList:GameObject;
+public var itemGameObjectPreix:String ="shuzi_";
 public var orderList:GameObject;
 public var itemPrefab:GameObject;
-private var m_dataList:List.<Question>;
-private var m_score:int = 0;
+public var atlas:UIAtlas;
+protected var m_dataList:List.<Question>;
+// private var m_score:int = 0;
 // private var m_putCount:int = 0;
 
 
@@ -14,13 +16,6 @@ function Awake():void{
 	DontDestroyOnLoad(transform.gameObject);
 }
 
-function updateOriginListPresent(data : List.<Question>):void{
-	for(var q:Question in data){
-		createItemForQuestionList(q);
-	}
-	var orderList:UITable = orderList.GetComponent("UITable") as UITable;
-	orderList.Reposition();
-}
 
 function onLoadDataComplete():void{
 	Debug.Log("I got the load data complete event!");
@@ -37,7 +32,7 @@ function setData(data:List.<Question>):void{
 	init();
 }
 
-function init():void{
+override public function init():void{
 	m_score = 0;
 	
 	DataManager.getInstance().RandomizeBuiltinArray(m_dataList);
@@ -63,7 +58,7 @@ function init():void{
 
 
 	childCount = originList.transform.childCount;
-	Debug.Log("childCount = "+ childCount);
+	
 	for(index = 0; index<childCount; index++){
 		var child:Transform = originList.transform.GetChild(index);
 		var containerTransform:Transform = child.Find("container");
@@ -75,18 +70,32 @@ function init():void{
 			var container:UISprite = containerTransform.gameObject.GetComponent(UISprite) as UISprite;
 			
 			if(container){
-				container.spriteName = "shuzi_"+(index+1);
+				container.spriteName = getItemInstanceUISpriteName(index);
 			}
 		}
 	}
-	//clearnChildren(orderList.transform);
-
+	
 
 }
 
+protected function getItemInstanceUISpriteName(index:int):String{
+	return itemGameObjectPreix+(index+1);
+}
+
+
+
+function updateOriginListPresent(data : List.<Question>):void{
+	for(var q:Question in data){
+		createItemForQuestionList(q);
+	}
+	var orderList:UITable = orderList.GetComponent("UITable") as UITable;
+	orderList.Reposition();
+}
+// create item 
 function createItemForQuestionList(itemData:Question):void{
 	var itemDisplay:GameObject = null;
 	itemDisplay = Instantiate(itemPrefab);
+
 	itemDisplay.transform.parent = orderList.transform;		
 	itemDisplay.transform.localScale = new Vector3(1,1,1);
 	itemDisplay.transform.localPosition = new Vector3(0,0,0);
@@ -95,7 +104,9 @@ function createItemForQuestionList(itemData:Question):void{
 
 	var displayComponent: UISprite = itemDisplay.GetComponent( UISprite) as  UISprite;
 	if(itemData){
-		displayComponent.spriteName = itemData.image;		
+		displayComponent.atlas = atlas;
+		displayComponent.spriteName = itemData.image;
+		Debug.Log( itemData.image,this);		
 	}
 	var dataComponent:DataItem_Controller = itemDisplay.GetComponent(DataItem_Controller) as DataItem_Controller;
 	if(null == dataComponent){
@@ -105,6 +116,7 @@ function createItemForQuestionList(itemData:Question):void{
 		dataComponent.tag = "estimate_item_1_tag";
 	}
 }
+// tool function
 function getDataCtrlComponentCount(parent:Transform):Array{
 		var index:int = 0;
 		var ctrl_array:Array=[];
@@ -127,9 +139,8 @@ function onDropToChangeDisplay(){
 
 	var originList_children:Array = getDataCtrlComponentCount(originList.transform);
 	var improve_originList_children:Array =  [];
-	Debug.Log("XX@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ = "+ originList_children.length);
+	
 	for(var child:DataItem_Controller in originList_children){
-		Debug.Log("child.gameObject.name===="+child.gameObject.name+",id = "+child.id);
 
 		if(child.gameObject.name.IndexOf("op_")!=-1){
 			continue;
@@ -142,8 +153,7 @@ function onDropToChangeDisplay(){
 	}
 	var orderList_children:Array= getDataCtrlComponentCount (orderList.transform );
 	
-	Debug.Log("originList_children.length  = "+originList_children.length );
-	Debug.Log("orderList_children.length =  "+orderList_children.length);
+	
 	if((originList_children.length +  orderList_children.length) == m_dataList.Count){
 		return ;
 	}
@@ -155,10 +165,10 @@ function onDropToChangeDisplay(){
 	destination.AddRange(m_dataList);
 	var excludeData:Array = [];
 	for(var child:DataItem_Controller in originList_children){
-		Debug.Log(child.gameObject.name+";;;;;;;;;;;;;;;;;;;;");
+		
 		var data:Question = getQuestionById(child.id,destination);
 		if(data!=null){
-			Debug.Log("remove "+ child.id);
+			
 			destination.Remove(data);
 			continue;
 		}else{
@@ -196,7 +206,7 @@ function clearnChildren(parent:Transform):void{
 	parent.DetachChildren();
 }
 
-function onConfirm():void{
+public function onConfirm():void{
 	
 	
 	var originList_children:Array = getDataCtrlComponentCount(originList.transform);
@@ -212,7 +222,6 @@ function onConfirm():void{
 		var questData:Question = getQuestionById(dataComponent.id,null);
 		Debug.Log(dataComponent.id+",questData.answer  = " +questData.answer +",index = "+index);
 		if(parseInt(questData.answer) == index){
-			Debug.Log("{}{{}{{{}}}}");
 			m_score+=questData.score;
 		}
 	}
@@ -232,4 +241,5 @@ function getQuestionById(id:String,data:List.<Question>):Question{
 		}
 	}
 	return null;
+}
 }

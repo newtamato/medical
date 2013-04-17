@@ -3,11 +3,11 @@
 	<Dialogs name="dialog_1">
 		<Dialog name="selectRightOrder" allscore="12">
       <Questions>
-        <Question id="estimate_dialog" answer="1" score="3" text="评估现场"></Question>
-        <Question id="hotline_dialog" answer="2" score="3" text="紧急电话"></Question>
-        <Question id="classficate_1_dialog" answer="3" score="3" text="检伤处理"></Question>
-        <Question id="security_line" answer="4" score="3" text="安全线"></Question>
-        
+        <Question id="estimate_dialog" answer="1" score="3" text="评估现场" image="binggu"></Question>
+        <Question id="hotline_dialog" answer="2" score="3" text="紧急电话" image="jijiudianhua"></Question>
+        <Question id="classficate_1_dialog" answer="3" score="3" text="检伤处理" image="jianshangfenlei"></Question>
+        <Question id="security_line" answer="4" score="3" text="安全线" image="jingjiexian"></Question>
+        <Question id="startToSave" answer="5" score="3" text="实施抢救" image="qiangjiu"></Question>
       </Questions>
 		</Dialog>
 		<Dialog name="estimateLive" allscore="24">

@@ -205,16 +205,16 @@ function LoadXML()
 {
    Debug.Log("_FileLocation = "+_FileLocation);
    
-   var webReq:WWW = new WWW(_FileLocation+"/"+ _FileName);
+   // var webReq:WWW = new WWW(_FileLocation+"/"+ _FileName);
 
-   yield  webReq;
+   // yield  webReq;
 
-   _data = webReq.text;
+   // _data = webReq.text;
 
-   // var r : StreamReader = File.OpenText(_FileLocation+"/"+ _FileName);
-   // var _info : String = r.ReadToEnd();
-   // r.Close();
-   // _data=_info;
+   var r : StreamReader = File.OpenText(_FileLocation+"/"+ _FileName);
+   var _info : String = r.ReadToEnd();
+   r.Close();
+   _data=_info;
    if(_data )
    {
       
