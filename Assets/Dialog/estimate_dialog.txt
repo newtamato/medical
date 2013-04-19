@@ -183,6 +183,14 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":32,"y":14,"w":369,"h":255},
 	"sourceSize": {"w":417,"h":287}
+},
+"wenbenkuang.png":
+{
+	"frame": {"x":373,"y":630,"w":594,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":594,"h":128},
+	"sourceSize": {"w":594,"h":128}
 }},
 "meta": {
 	"app": "http://www.texturepacker.com",
@@ -191,6 +199,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:00f372caa914f1c5f359d1620b7987c9$"
+	"smartupdate": "$TexturePacker:SmartUpdate:8fdf5a2bd89c26dad8db1a22e444336b$"
 }
 }

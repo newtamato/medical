@@ -1,6 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/DataManager.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/CallHotLine_Controller.js">
     <Files>
       <File FileName="Assets/NGUI/Examples/Scripts/Other/DragDropItem.cs" Line="1" Column="1" />
       <File FileName="Assets/NGUI/Examples/Scripts/Other/DragDropSurface.cs" Line="1" Column="1" />

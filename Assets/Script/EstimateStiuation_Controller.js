@@ -4,12 +4,13 @@ public var estimateList:GameObject;
 public var validList:GameObject;
 public var invalidList:GameObject;
 public var smallEstimatePrefab:GameObject;
-
+public var toolTip:GameObject;
 
 private var okBtn:GameObject;
 
 private var dataList:List.<Question>;
 private var m_score:int = 0;
+
 function Start () {
 	
 }
@@ -37,6 +38,7 @@ function onLoadDataComplete():void{
 
 
 function init():void{
+	hideToolTip();
 	if(null == dataList){
 		return;
 	}
@@ -63,6 +65,7 @@ function init():void{
 			item.transform.parent = grid.transform;		
 
 			item.name = "estimate_item_"+ index;
+
 			var displayComponent:EstiamateItem_Controller = item.GetComponent(EstiamateItem_Controller) as EstiamateItem_Controller;
 		 	img=displayComponent.img;
 			if(img){
@@ -71,8 +74,29 @@ function init():void{
 			}else{
 				Debug.Log(itemdata.id +"i can not find img gameobject");
 			}
+			displayComponent.setData(itemdata);
 			item.transform.localScale = new Vector3(1,1,1);
 			item.transform.localPosition = new Vector3(1,1,1);
+			
+			//add mouse over handle
+			var uiMsgComponent:UIButtonMessage = item.GetComponent(UIButtonMessage) as UIButtonMessage;
+			if(uiMsgComponent == null){
+				uiMsgComponent = item.AddComponent(UIButtonMessage);
+			}
+			uiMsgComponent.target = this.gameObject;
+			uiMsgComponent.trigger = UIButtonMessage.Trigger.OnMouseOver;
+			uiMsgComponent.functionName = "OnMouseOverEstimateItemHandle";
+			uiMsgComponent.includeChildren = false;
+
+			//add mouse out handle
+			var mouseOutComponent:UIButtonMessage = item.AddComponent(UIButtonMessage);
+			
+			mouseOutComponent.target = this.gameObject;
+			mouseOutComponent.trigger = UIButtonMessage.Trigger.OnMouseOut;
+			mouseOutComponent.functionName = "onMouseOutEstimateItemHandle";
+			mouseOutComponent.includeChildren = false;
+
+
 		}
 	}
 	UIManager.getInstance().ChangeLayersRecursively(grid.transform,"uilayer");
@@ -199,12 +223,35 @@ function getScoreById(id:String):int{
 
 }
 
+function OnMouseOverEstimateItemHandle(go:GameObject):void{
+	
+	var estimateComponent:EstiamateItem_Controller = go.GetComponent(EstiamateItem_Controller) as EstiamateItem_Controller;
+	if(estimateComponent){
 
-function onLeftBtn():void{
-	estimateList.transform.localPosition.x -=150;
-
-
+		var tipStr:String = estimateComponent.getToolTipString();
+		Debug.Log("OnMouseOverEstimateItemHandle::"+ tipStr,this);	
+		showToolTip(tipStr);
+	}
+	
 }
-function onRightBtn():void{
-	estimateList.transform.localPosition.x +=150;
+
+function onMouseOutEstimateItemHandle(go:GameObject):void{
+	hideToolTip();
+}
+function showToolTip(str:String):void{
+	if(toolTip){
+		var tipCtrl:Tip_Controller = toolTip.GetComponent(Tip_Controller) as Tip_Controller;
+		toolTip.active = true;
+		toolTip.SetActiveRecursively(true);
+		tipCtrl.setText(str);
+	}
+}
+
+
+function hideToolTip():void{
+	if(toolTip){
+		toolTip.active = false;
+		toolTip.SetActiveRecursively(false);
+		
+	}	
 }

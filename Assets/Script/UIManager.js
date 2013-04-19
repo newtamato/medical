@@ -74,7 +74,7 @@ function nextDialog():void{
 	Debug.Log("UIManager::nextDialog :: mDialogQueue.length = "+ mDialogQueue.length +",mDialogIndex = "+mDialogIndex);
 
 	if(mDialogQueue.length<=mDialogIndex){
-
+		clearAll();
 		showDialog(UI_SCORE,0);
 		var scoreComponent:ScoreDialog_Controller = dialog_score.GetComponent(ScoreDialog_Controller) as ScoreDialog_Controller;
 		if(scoreComponent){
@@ -113,9 +113,12 @@ function initAllDialog():void{
 	var phoneResult:CallHotLineResult_Controller = dialog_callHotLineResult.GetComponent(CallHotLineResult_Controller);
 	phoneResult.init();
 
-	var tiles_tran:Transform = findTransformByName("tiles",map.transform);
-	var tileMap:NewSecurityCheck_Controller =tiles_tran.GetComponent(NewSecurityCheck_Controller);
-	tileMap.init();
+	var tiles_tran:Transform = findTransformByName("mapTileContainer",map.transform);
+	if (tiles_tran) {
+		var tileMap:TileManager =tiles_tran.GetComponent(TileManager);
+		tileMap.init();
+	}
+	
 }
 
 

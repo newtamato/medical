@@ -55,6 +55,14 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":158,"h":158},
 	"sourceSize": {"w":158,"h":158}
+},
+"unselected.png":
+{
+	"frame": {"x":162,"y":672,"w":158,"h":158},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":158,"h":158},
+	"sourceSize": {"w":158,"h":158}
 }},
 "meta": {
 	"app": "http://www.texturepacker.com",
@@ -63,6 +71,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1024,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:807f592326b47d97ec400bff4dc3f9a6$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a6e051069ab3c82851d579c77185c03c$"
 }
 }

@@ -23,22 +23,16 @@ class MainMenuDialog_Controller extends MakeChoiceToSave_Controller{
 	}
 
 	override protected function getItemInstanceUISpriteName(index:int):String{
-		return "binggu";
+		return itemGameObjectPreix;
 	}
 
 	override public function onConfirm():void{
 		super.onConfirm();
 		var dialogNames:Array = new Array();
-		var originList_children:Array = getDataCtrlComponentCount(originList.transform);
-		var child_count :int = originList_children.length;
-		for(var index:int = 1; index<=child_count ;index++){
-			var child:Transform = UIManager.getInstance().findTransformByName("order_"+index,originList.transform);
-			var dataComponent:DataItem_Controller = child.GetComponent(DataItem_Controller);
-			dialogNames.push(dataComponent.id);
-			
-		}
+		
+		dialogNames= [UIManager.UI_HOT_LINE,UIManager.UI_ESTIMATE,UIManager.UI_CLASSFICATE_1,UIManager.UI_SECURITY];
 		if(dialogNames.length>0){
-			Debug.Log(dialogNames);
+			
 			UIManager.getInstance().setDialogQueue(dialogNames);
 			UIManager.getInstance().nextDialog();
 		}

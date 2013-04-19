@@ -24,9 +24,33 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":59},
 	"sourceSize": {"w":94,"h":59}
 },
+"answer_0.png":
+{
+	"frame": {"x":240,"y":2,"w":188,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":45},
+	"sourceSize": {"w":188,"h":45}
+},
+"answer_1.png":
+{
+	"frame": {"x":430,"y":2,"w":187,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":187,"h":45},
+	"sourceSize": {"w":187,"h":45}
+},
+"answer_2.png":
+{
+	"frame": {"x":619,"y":2,"w":236,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":236,"h":45},
+	"sourceSize": {"w":236,"h":45}
+},
 "avator.png":
 {
-	"frame": {"x":240,"y":2,"w":65,"h":83},
+	"frame": {"x":857,"y":2,"w":65,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":65,"h":83},
@@ -34,7 +58,7 @@
 },
 "backDelete.png":
 {
-	"frame": {"x":307,"y":2,"w":94,"h":59},
+	"frame": {"x":924,"y":2,"w":94,"h":59},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":59},
@@ -42,7 +66,7 @@
 },
 "boda.png":
 {
-	"frame": {"x":403,"y":2,"w":144,"h":59},
+	"frame": {"x":1020,"y":2,"w":144,"h":59},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":59},
@@ -50,7 +74,7 @@
 },
 "bodaliang.png":
 {
-	"frame": {"x":549,"y":2,"w":144,"h":59},
+	"frame": {"x":1166,"y":2,"w":144,"h":59},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":59},
@@ -58,7 +82,7 @@
 },
 "callPhoneDialogBack.png":
 {
-	"frame": {"x":695,"y":2,"w":638,"h":507},
+	"frame": {"x":1312,"y":2,"w":638,"h":507},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":638,"h":507},
@@ -66,7 +90,7 @@
 },
 "checkbox_bg.png":
 {
-	"frame": {"x":1335,"y":2,"w":32,"h":32},
+	"frame": {"x":1952,"y":2,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -74,7 +98,7 @@
 },
 "clientServer.png":
 {
-	"frame": {"x":1369,"y":2,"w":552,"h":393},
+	"frame": {"x":2,"y":511,"w":552,"h":393},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":552,"h":393},
@@ -82,7 +106,7 @@
 },
 "dialogBackGround.png":
 {
-	"frame": {"x":2,"y":511,"w":553,"h":549},
+	"frame": {"x":556,"y":511,"w":553,"h":549},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":553,"h":549},
@@ -90,7 +114,7 @@
 },
 "dialogWordsBack.png":
 {
-	"frame": {"x":557,"y":511,"w":286,"h":71},
+	"frame": {"x":1111,"y":511,"w":286,"h":71},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":286,"h":71},
@@ -98,7 +122,7 @@
 },
 "guaduan.png":
 {
-	"frame": {"x":845,"y":511,"w":140,"h":59},
+	"frame": {"x":1399,"y":511,"w":140,"h":59},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":140,"h":59},
@@ -106,7 +130,7 @@
 },
 "guaduanliang.png":
 {
-	"frame": {"x":987,"y":511,"w":140,"h":59},
+	"frame": {"x":1541,"y":511,"w":140,"h":59},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":140,"h":59},
@@ -114,7 +138,7 @@
 },
 "onLineBackground.png":
 {
-	"frame": {"x":1129,"y":511,"w":538,"h":455},
+	"frame": {"x":2,"y":1062,"w":538,"h":455},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":538,"h":455},
@@ -122,7 +146,7 @@
 },
 "shouji.png":
 {
-	"frame": {"x":1669,"y":511,"w":309,"h":541},
+	"frame": {"x":542,"y":1062,"w":309,"h":541},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":309,"h":541},
@@ -130,7 +154,7 @@
 },
 "shuzi_1.png":
 {
-	"frame": {"x":2,"y":1062,"w":130,"h":174},
+	"frame": {"x":853,"y":1062,"w":130,"h":174},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":174},
@@ -138,7 +162,7 @@
 },
 "shuzi_2.png":
 {
-	"frame": {"x":134,"y":1062,"w":130,"h":174},
+	"frame": {"x":985,"y":1062,"w":130,"h":174},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":174},
@@ -146,7 +170,7 @@
 },
 "shuzi_3.png":
 {
-	"frame": {"x":266,"y":1062,"w":130,"h":174},
+	"frame": {"x":1117,"y":1062,"w":130,"h":174},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":174},
@@ -154,7 +178,7 @@
 },
 "shuzi_4.png":
 {
-	"frame": {"x":398,"y":1062,"w":130,"h":174},
+	"frame": {"x":1249,"y":1062,"w":130,"h":174},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":174},
@@ -162,7 +186,7 @@
 },
 "xuanzekuang.png":
 {
-	"frame": {"x":530,"y":1062,"w":129,"h":177},
+	"frame": {"x":1381,"y":1062,"w":129,"h":177},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":129,"h":177},
@@ -175,6 +199,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:9672099120b77b5cf34d22bf370859ad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f82ec221ce568dafb2a8b3cd948440c2$"
 }
 }

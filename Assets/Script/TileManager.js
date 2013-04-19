@@ -310,8 +310,13 @@ function onConfirm():void{
 		count+=right_score_map.Count;
 	}
 	Debug.Log("onConfirm........................................count = "+ count);
+
 	UIManager.getInstance().addScore(count*2);
-	UIManager.getInstance().nextDialog();
+	Global.getInstance().setCurrentState(Global.UI);
+	UIManager.getInstance().activeSceneAndDeactiveMap(true);
+	
+	UIManager.getInstance().addFinishedDialog(UIManager.UI_SECURITY);	
+	UIManager.getInstance().nextDialog();	
 }
 
 
