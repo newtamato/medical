@@ -10,7 +10,9 @@ public var rotatePointer:GameObject;
 public var arrow:GameObject;
 public var labelTxt:UILabel;
 public var btn:GameObject;
-
+public var btnSave:GameObject;
+public var btnStart:GameObject;
+public var btnFinish:GameObject;
 private var m_currentId:String;
 private var m_currentGameObject:GameObject = null;
 private var dataList:List.<Question> =null;
@@ -113,12 +115,12 @@ function onMouseOverToPatientItem(id:String,msg:String,gameObject_name:String,it
 	tipComponent.setText(msg);
 	var hasDoneIt:boolean = hasDoneIt(m_currentId);
 	if(hasDoneIt){
-		btn.active = false;
-		btn.SetActiveRecursively(false);
+		// btn.active = false;
+		// btn.SetActiveRecursively(false);
 		return;
 	}else{
-		btn.active = true;
-		btn.SetActiveRecursively(true);
+		// btn.active = true;
+		// btn.SetActiveRecursively(true);
 		
 		m_start = true;
 	}
@@ -312,19 +314,38 @@ function Update():void{
 	}
 	var hasFinished:boolean = hasAllFinish();
 	if(hasFinished){
-		labelTxt.text = "答题完毕";
-		btn.active = true;
-		btn.SetActiveRecursively(true);
+		//labelTxt.text = "答题完毕";
+		showButton("finish");
+		//btn.active = true;
+		//btn.SetActiveRecursively(true);
 
 	}else{
 		if(m_start){
-			labelTxt.text = "开始";
+			// labelTxt.text = "开始";
+			showButton("start");
 		}else{
-			labelTxt.text = "结束";
+			showButton("save");
+			// labelTxt.text = "结束";
 		}
 	}
 }
-
+public function showButton(str:String):void{
+	if(str == "start"){
+		btnSave.active = false;
+		btnStart.active = true;
+		btnFinish.active = false;
+	}
+	if(str == "save"){
+		btnSave.active = true;
+		btnStart.active = false;
+		btnFinish.active = false;
+	}
+	if(str == "finish"){
+		btnSave.active = false;
+		btnStart.active = false;
+		btnFinish.active = true;
+	}
+}
 function hasDoneIt(id:String):boolean{
 	for(var obj:AnswerDataValue in m_answers){
 		if(obj.id == id){

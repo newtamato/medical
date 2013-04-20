@@ -208,6 +208,7 @@ function LoadXML()
    var webReq:WWW = new WWW(_FileLocation+"/"+ _FileName);
 
    yield  webReq;
+   
 
    _data = webReq.text;
 

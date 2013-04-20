@@ -58,10 +58,10 @@
 },
 "unselected.png":
 {
-	"frame": {"x":162,"y":672,"w":158,"h":158},
+	"frame": {"x":162,"y":672,"w":0,"h":0},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":158,"h":158},
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":0,"h":0},
 	"sourceSize": {"w":158,"h":158}
 }},
 "meta": {
@@ -71,6 +71,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1024,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a6e051069ab3c82851d579c77185c03c$"
+	"smartupdate": "$TexturePacker:SmartUpdate:796dd2c67df1b2059d5905d0b30903c4$"
 }
 }

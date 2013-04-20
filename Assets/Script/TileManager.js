@@ -7,7 +7,7 @@ public var tileDangerous:GameObject;
 public var warningGameObject:GameObject;
 public var dun:GameObject;
 public var mapContainer:GameObject;
-
+public var dunContainer:GameObject;
 //public var tileItemBack:GameObject;
 
 private static var DIRECT_TOP:String = "top";
@@ -117,8 +117,14 @@ function init():void{
 	transform.localEulerAngles = new Vector3(0,1.480264,0);
 	transform.localScale = new Vector3(2,1,2);
 	if(mapContainer){
-		mapContainer.transform.localPosition = new Vector3(-28.85179,-30,180);
+		mapContainer.transform.localPosition = new Vector3(-28.85179,-39.7,180);
 		mapContainer.transform.localEulerAngles = new Vector3(270,0,0);
+
+
+	}
+	if(dunContainer){
+		dunContainer.transform.localPosition = new Vector3(-28.85179,-39.7,180);
+		dunContainer.transform.localEulerAngles = new Vector3(270,0,0);
 	}
 	// var table:UITable = transform.GetComponent(UITable);
 	// table.Reposition();
@@ -152,6 +158,7 @@ function createItem(color:String,col:int,row:int,name:String):void{
 }
 
 function Update () {
+	
 	if(Input.GetMouseButtonDown(0))
 	{
 		var ray: Ray =Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -162,7 +169,7 @@ function Update () {
 		 	var str:String = hit.collider.name;
 		 	var mousePos:Vector3 = hit.point;
 			 	
-		
+			
 			addDun(mousePos);
 
 			var name:String= str;
@@ -190,12 +197,12 @@ function Update () {
 public function addDun (mousePos:Vector3) {
 
 	var dun:GameObject = Instantiate(dun);
-	dun.transform.parent = transform;
+	dun.transform.parent = dunContainer.transform;
 	
 
-	dun.transform.localScale = new Vector3(20,20,20);
+	dun.transform.localScale = new Vector3(40,40,40);
 	dun.transform.position = mousePos;
-	dun.transform.localPosition.y = 22;
+	// dun.transform.localPosition.y = 22;
 	Debug.Log(mousePos,this);
 	m_dun.push(dun);
 }

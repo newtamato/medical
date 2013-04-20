@@ -48,18 +48,18 @@
     </Dialog>
     <Dialog name="classification" allscore="36">
       <Questions>
-      <Question id="q_0" answer="black" score="3" image="CK_MALE_01" text="乘客0:中年男性，呼之不应，胸廓无起伏，颈动脉搏动消失，瞳孔散大，头部受伤严重，满头是血，可见脑浆，全身皮肤青紫。对应贴黑色伤情识别卡。"></Question>
-      <Question id="q_1" answer="red" score="3" image="SY_MALE_01" text="乘客1:中年男性，讲话稍费力，气道通畅，呼吸23次/分，胸部查体正常，心率110次/分，血压80/50mmHg，神志清醒，四肢触、痛觉存在。平躺着一动不动，面色苍白，左腘窝处外伤，流血不止，身体其他部位未见明显外伤。诊断：左下肢开放性外伤、左侧腘动脉损伤。"></Question>
-      <Question id="q_2" answer="yellow" score="3" image="CK_FEMALE_02" text="乘客2:中年女性，神志清醒，对答如流，呼吸21次/分，心率98次/分。头部前额、左脚流血，表情痛苦。"></Question>
-      <Question id="q_3" answer="yellow" score="3" image="CK_MALE_03" text="乘客3:青年男性，神志清醒，对答如流。呼吸23次/分，心率102次/分。左小腿前部正中被行李箱压住了，表情痛苦。"></Question>
-      <Question id="q_4" answer="yellow" score="3" image="CK_MALE_04" text="乘客4：中年男性，神志清醒，对答如流，呼吸22次/分，心率95次/分。头顶部、右脚大脚趾流血。"></Question>
-      <Question id="q_5" answer="yellow" score="3" image="CK_MALE_06" text="乘客6：青年男性，神志清醒，对答如流，呼吸23次/分，心率108次/分。腹部插着半截玻璃。"></Question>
-      <Question id="q_6" answer="yellow" score="3" iamge="CK_MALE_07" text="乘客7：青年男性，神志清醒，对答如流，呼吸22次/分，心率105次/分。右前臂和右大腿都不能动、肿胀明显（骨折的伤员）。"></Question>
-      <Question id="q_7" answer="yellow" score="3" image="CK_MALE_08" text="乘客8：中年男性，神志清醒，对答如流，呼吸20次/分，心率90次/分。平躺着不动，表情痛苦（脊柱受伤的伤员）。"></Question>
-      <Question id="q_8" answer="blue"  score="3" image="CK_FEMALE_05" text="乘客5：小女孩，神志清醒，对答如流，生命体征正常。右前臂掌侧正中划伤，轻微流血。"></Question>
-      <Question id="q_9" answer="blue" score="3" image="CK_FEMALE_09" text="乘客9：老奶奶，神志清醒，对答如流，生命体征正常。轻伤，需要扶行的伤员。"></Question>
-      <Question id="q_10" answer="blue" score="3" image="CK_MALE_10" text="乘客10：老大爷，神志清醒，对答如流，生命体征正常。轻伤，需要担架抬出的伤员。"></Question>
-      <Question id="q_11" answer="blue" score="3" image="CK_MALE_11" text="乘客11：青年男性，神志清醒，对答如流，生命体征正常。体轻，左脚背被划伤了、能自己行走。"></Question>
+      <Question id="q_0" answer="black" score="3" image="b1" text="乘客0:中年男性，呼之不应，胸廓无起伏，颈动脉搏动消失，瞳孔散大，头部受伤严重，满头是血，可见脑浆，全身皮肤青紫。对应贴黑色伤情识别卡。"></Question>
+      <Question id="q_1" answer="red" score="3" image="b5" text="乘客1:中年男性，讲话稍费力，气道通畅，呼吸23次/分，胸部查体正常，心率110次/分，血压80/50mmHg，神志清醒，四肢触、痛觉存在。平躺着一动不动，面色苍白，左腘窝处外伤，流血不止，身体其他部位未见明显外伤。诊断：左下肢开放性外伤、左侧腘动脉损伤。"></Question>
+      <Question id="q_2" answer="yellow" score="3" image="b11" text="乘客2:中年女性，神志清醒，对答如流，呼吸21次/分，心率98次/分。头部前额、左脚流血，表情痛苦。"></Question>
+      <Question id="q_3" answer="yellow" score="3" image="b12" text="乘客3:青年男性，神志清醒，对答如流。呼吸23次/分，心率102次/分。左小腿前部正中被行李箱压住了，表情痛苦。"></Question>
+      <Question id="q_4" answer="yellow" score="3" image="b10" text="乘客4：中年男性，神志清醒，对答如流，呼吸22次/分，心率95次/分。头顶部、右脚大脚趾流血。"></Question>
+      <Question id="q_5" answer="yellow" score="3" image="b4" text="乘客6：青年男性，神志清醒，对答如流，呼吸23次/分，心率108次/分。腹部插着半截玻璃。"></Question>
+      <Question id="q_6" answer="yellow" score="3" iamge="b7" text="乘客7：青年男性，神志清醒，对答如流，呼吸22次/分，心率105次/分。右前臂和右大腿都不能动、肿胀明显（骨折的伤员）。"></Question>
+      <Question id="q_7" answer="yellow" score="3" image="b8" text="乘客8：中年男性，神志清醒，对答如流，呼吸20次/分，心率90次/分。平躺着不动，表情痛苦（脊柱受伤的伤员）。"></Question>
+      <Question id="q_8" answer="blue"  score="3" image="b9" text="乘客5：小女孩，神志清醒，对答如流，生命体征正常。右前臂掌侧正中划伤，轻微流血。"></Question>
+      <Question id="q_9" answer="blue" score="3" image="b2" text="乘客9：老奶奶，神志清醒，对答如流，生命体征正常。轻伤，需要扶行的伤员。"></Question>
+      <Question id="q_10" answer="blue" score="3" image="b3" text="乘客10：老大爷，神志清醒，对答如流，生命体征正常。轻伤，需要担架抬出的伤员。"></Question>
+      <Question id="q_11" answer="blue" score="3" image="b6" text="乘客11：青年男性，神志清醒，对答如流，生命体征正常。体轻，左脚背被划伤了、能自己行走。"></Question>
     </Questions>
     </Dialog>
 	</Dialogs>

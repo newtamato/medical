@@ -112,8 +112,10 @@ function addStar(count:int,container:Transform):void{
 
 /***********************ok button handle*************************************/
 function onSmallScorePanelOK():void{
-	UIManager.getInstance().showDialog(UIManager.UI_MENU,0);	
+	UIManager.getInstance().returnBack();
+	// UIManager.getInstance().showDialog(UIManager.UI_MENU,0);	
 }
 function returnBackHome():void{
-	UIManager.getInstance().showDialog(UIManager.UI_MENU,0);
+	UIManager.getInstance().returnBack();
+	//UIManager.getInstance().showDialog(UIManager.UI_MENU,0);
 }

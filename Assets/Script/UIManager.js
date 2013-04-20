@@ -56,6 +56,10 @@ function Start () {
 	Global.getInstance().setCurrentState(Global.UI);
 
 	DataManager.getInstance().startLoadData();	
+
+	map.active = false;
+	map.SetActiveRecursively(false);
+
 }
 function Awake():void{
 	DontDestroyOnLoad( transform.gameObject);
@@ -113,6 +117,9 @@ function initAllDialog():void{
 	var phoneResult:CallHotLineResult_Controller = dialog_callHotLineResult.GetComponent(CallHotLineResult_Controller);
 	phoneResult.init();
 
+	var mainMenu:MainMenuDialog_Controller = dialog_menu.GetComponent(MainMenuDialog_Controller) as MainMenuDialog_Controller;
+	mainMenu.init();
+	
 	var tiles_tran:Transform = findTransformByName("mapTileContainer",map.transform);
 	if (tiles_tran) {
 		var tileMap:TileManager =tiles_tran.GetComponent(TileManager);
@@ -187,6 +194,7 @@ function clearAllDialog():void{
 }
 
 function activeSceneAndDeactiveMap(activeScene:boolean):void{
+
 	if(scene.active == activeScene){
 		return;
 	}
@@ -196,16 +204,25 @@ function activeSceneAndDeactiveMap(activeScene:boolean):void{
 		go.active = activeScene;
 		go.SetActiveRecursively(activeScene);
 	}
-	map.active = !activeScene;
-	map.SetActiveRecursively(!activeScene);
+	Debug.Log("UIManager::activeSceneAndDeactiveMap::activeScene = "+ activeScene);
+	
+	var mapActive:boolean = activeScene == true ? false : true;
+	Debug.Log("UIManager::activeSceneAndDeactiveMap::mapActive = "+ mapActive );
+	
+	map.active = mapActive;
+	map.SetActiveRecursively(mapActive);
 
 	if(activeScene == false){
 		// Camera.main.fieldOfView = 48;
 		Camera.main.orthographic = true;
-		Camera.main.orthographicSize = 60;
+		Camera.main.orthographicSize = 50;
+		Camera.main.transform.position.y = -24;
+		Camera.main.transform.eulerAngles.x = 0;
+		// Camera.main.localPosition.z = 37.65188;
 	}else{
 		Camera.main.orthographic = false;
 		Camera.main.fieldOfView = 60;
+		Camera.main.transform.position.y = 1.616785;
 	}
 }
 

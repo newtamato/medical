@@ -17,6 +17,8 @@ public static var PHONE_PANEL:String = "phone";
 public static var HOT_LINE_PANEL:String = "hotline";
 private var m_firstPage:Boolean = true;
 private var mRightNumber:int = 0;
+// it is very important to set the uigrid cell height
+private var m_cellHeight:int = 50;
 function Start () {
 	m_score = 0;
 	initPhone();
@@ -111,19 +113,7 @@ override public function setData():void{
 	var grid:UIGrid = questionList.GetComponent("UIGrid") as UIGrid;
 
 	UIManager.getInstance().clearnChildren(questionList.transform);
-	// var childCount :int = questionList.transform.childCount;
-	// if(childCount >= mQuestions.Count){
-	// 	for(var i:int = 0;i< childCount;i++){
-	// 		var childTrans:Transform = questionList.transform.GetChild(i);
-	// 		if(childTrans){
-	// 			var cbx:UICheckbox = childTrans.GetComponent(UICheckbox);
-	// 			cbx.isChecked = false;
-	// 		}
-	// 	}
-	// }else{
-		
-	// }
-
+	
 	var index:int = mQuestions.Count;
 	for(var itemData:Question in mQuestions){
 		var item:GameObject = Instantiate(itemPrefab);
@@ -137,8 +127,10 @@ override public function setData():void{
 		itemDataComponent.questionData = itemData;
 		itemDataComponent.label.text = itemData.text;
 	}
-	grid.Reposition();
+	grid.cellHeight = m_cellHeight;
 	
+	grid.Reposition();
+
 	UIManager.getInstance().ChangeLayersRecursively(gameObject.transform,"uilayer");
 }
 
@@ -232,7 +224,9 @@ function onConfim():void {
 		m_firstPage = false;
 		var num:int = mAllQuestions.Count;
 		mQuestions = mAllQuestions.GetRange(5,num-5);
+		m_cellHeight = 70;
 		setData();
+		
 	}else{
 		// finish this dialgo and all score 	
 		UIManager.getInstance().addScore(m_score);
